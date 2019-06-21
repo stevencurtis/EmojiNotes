@@ -9,18 +9,10 @@
 import Foundation
 import CoreData
 
-// inherit from NSOBject o conform to NSFetchedResultsControllerDelegate
+// inherit from NSObject o conform to NSFetchedResultsControllerDelegate
 public class NotesViewModel: NSObject {
-    
-//    var notes: [NSManagedObject]? {
-//        didSet {
-//            modelDidChange!(notes!)
-//        }
-//    }
-    
-//    public var modelDidChange: (([NSManagedObject])->Void)?
-    public var modelDidChange: (()->Void)?
 
+    public var modelDidChange: (()->Void)?
     
     lazy var fetchedResultsController: NSFetchedResultsController<Note> = {
 
@@ -37,13 +29,7 @@ public class NotesViewModel: NSObject {
         return fetchedResultsController
     }()
     
-    func addNote() {
-        let note = Note(context: CoreDataManager().getManagedObjectContext()!)
-        note.contents = "Note contents"
-        note.title = "Note title"
-        note.createdAt = Date()
-        CoreDataManager().saveContext()
-    }
+
     
     public func fetchNotes() {
         do {

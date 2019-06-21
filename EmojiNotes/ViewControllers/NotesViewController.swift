@@ -12,8 +12,6 @@ import CoreData
 class NotesViewController: UIViewController {
     
     var notesViewModel : NotesViewModel?
-
-
     
     @IBOutlet weak var notesCollectionView: UICollectionView!
     
@@ -27,7 +25,6 @@ class NotesViewController: UIViewController {
         }
         
         notesViewModel?.fetchNotes()
-
         
         notesCollectionView.dataSource = self
         notesCollectionView.delegate = self
@@ -36,15 +33,9 @@ class NotesViewController: UIViewController {
         notesCollectionView.register(nib, forCellWithReuseIdentifier: "NotesCollectionViewCell")
     }
     
-    
-    
-    @IBAction func addNote(_ sender: UIBarButtonItem) {
-        notesViewModel?.addNote()
-    }
-    
-    
-    
-    
+//    @IBAction func addNote(_ sender: UIBarButtonItem) {
+//        notesViewModel?.addNote()
+//    }
 }
 
 extension NotesViewController: UICollectionViewDataSource {
@@ -64,10 +55,8 @@ extension NotesViewController: UICollectionViewDataSource {
 
             )
         }
-        
         return cell
     }
-
 }
 
 extension NotesViewController: UICollectionViewDelegate {

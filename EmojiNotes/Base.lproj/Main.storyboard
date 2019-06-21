@@ -57,6 +57,7 @@
         <!--Create Note View Controller-->
         <scene sceneID="VHV-A2-mz3">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rVd-Pc-U6Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="fns-YX-XiB" customClass="CreateNoteViewController" customModule="EmojiNotes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3nm-Pd-fMD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -74,6 +75,24 @@
                                 <rect key="frame" x="20" y="143" width="374" height="223"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gJ5-oA-qh9">
+                                <rect key="frame" x="20" y="374" width="374" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="textViewDone:" destination="fns-YX-XiB" eventType="primaryActionTriggered" id="bUq-Lw-fdv"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xa2-uI-8fi">
+                                <rect key="frame" x="175" y="412" width="65" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add Note"/>
+                                <connections>
+                                    <action selector="addNote:" destination="fns-YX-XiB" eventType="touchUpInside" id="dKz-Cc-420"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -82,12 +101,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uhY-uq-UUl"/>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="imageView" destination="oA1-aJ-7Gh" id="fAF-1Z-Hvg"/>
+                        <outlet property="inputTextField" destination="gJ5-oA-qh9" id="IQb-Op-LVC"/>
                         <segue destination="Oa3-z9-lZL" kind="show" identifier="selectImg" id="RUT-ca-ytn"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rVd-Pc-U6Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2034.7826086956522" y="150.66964285714286"/>
         </scene>

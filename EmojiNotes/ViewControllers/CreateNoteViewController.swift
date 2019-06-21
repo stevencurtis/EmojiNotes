@@ -13,13 +13,33 @@ protocol CreateNoteDelegate {
 }
 
 class CreateNoteViewController: UIViewController, CreateNoteDelegate {
+    
+    var createNoteViewModel : CreateNoteViewModel?
     var image : UIImage?
     
     @IBOutlet weak var imageView: UIImageView!
     
+    @IBOutlet weak var inputTextField: UITextField!
+    
+    var chosenText: String?
+    
+    @IBAction func textViewDone(_ sender: UITextField) {
+        chosenText = inputTextField.text
+        sender.resignFirstResponder()
+    }
+    
+    @IBAction func addNote(_ sender: UIButton) {
+        createNoteViewModel?.addNote()
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        createNoteViewModel = CreateNoteViewModel()
+    }
+    
     func provImage(_ img: UIImage) {
         image = img
-        
         imageView.image = img
     }
     
@@ -37,11 +57,7 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate {
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
     
     @IBAction func attachImage(_ sender: UIButton) {
     }
