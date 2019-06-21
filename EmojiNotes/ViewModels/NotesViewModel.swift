@@ -42,6 +42,7 @@ public class NotesViewModel: NSObject {
         note.contents = "Note contents"
         note.title = "Note title"
         note.createdAt = Date()
+        CoreDataManager().saveContext()
     }
     
     public func fetchNotes() {

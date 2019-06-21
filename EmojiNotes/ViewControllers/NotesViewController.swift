@@ -22,10 +22,7 @@ class NotesViewController: UIViewController {
         
         notesViewModel = NotesViewModel()
         
-
-        
         notesViewModel?.modelDidChange = {
-            
             self.notesCollectionView.reloadData()
         }
         
@@ -62,8 +59,8 @@ extension NotesViewController: UICollectionViewDataSource {
         if let note = notesViewModel?.fetchedResultsController.object(at: indexPath) {
             // configure the cell with the note
             print (
-            notesViewModel?.fetchedResultsController.object(at: indexPath).title,
-            notesViewModel?.fetchedResultsController.object(at: indexPath).createdAt
+            note.title,
+            note.createdAt
 
             )
         }

@@ -20,6 +20,8 @@
 		CAF2631422BCBBA000AA164C /* NotesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2631322BCBBA000AA164C /* NotesViewModel.swift */; };
 		CAF2631722BCC10700AA164C /* NotesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2631522BCC10600AA164C /* NotesCollectionViewCell.swift */; };
 		CAF2631822BCC10700AA164C /* NotesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAF2631622BCC10600AA164C /* NotesCollectionViewCell.xib */; };
+		CAF2631D22BCD96A00AA164C /* CreateNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2631C22BCD96A00AA164C /* CreateNoteViewController.swift */; };
+		CAF2631F22BCDA0000AA164C /* AttachPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2631E22BCDA0000AA164C /* AttachPhotoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,8 @@
 		CAF2631322BCBBA000AA164C /* NotesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewModel.swift; sourceTree = "<group>"; };
 		CAF2631522BCC10600AA164C /* NotesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesCollectionViewCell.swift; sourceTree = "<group>"; };
 		CAF2631622BCC10600AA164C /* NotesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotesCollectionViewCell.xib; sourceTree = "<group>"; };
+		CAF2631C22BCD96A00AA164C /* CreateNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteViewController.swift; sourceTree = "<group>"; };
+		CAF2631E22BCDA0000AA164C /* AttachPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachPhotoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +117,8 @@
 				CAF2631B22BCCE6000AA164C /* ViewControllers */,
 				CAF2631A22BCCE5500AA164C /* ViewModels */,
 				CAF262E222BCB69800AA164C /* Main.storyboard */,
+				CAF2631E22BCDA0000AA164C /* AttachPhotoViewController.swift */,
+				CAF2631C22BCD96A00AA164C /* CreateNoteViewController.swift */,
 				CAF2631922BCC9F000AA164C /* CollectionViewCell */,
 				CAF2630F22BCBA1500AA164C /* CoreDataManager.swift */,
 				CAF2631122BCBA4300AA164C /* Constants.swift */,
@@ -301,8 +307,10 @@
 			files = (
 				CAF2631222BCBA4300AA164C /* Constants.swift in Sources */,
 				CAF262E122BCB69800AA164C /* NotesViewController.swift in Sources */,
+				CAF2631D22BCD96A00AA164C /* CreateNoteViewController.swift in Sources */,
 				CAF2631422BCBBA000AA164C /* NotesViewModel.swift in Sources */,
 				CAF262E722BCB69800AA164C /* EmojiNotes.xcdatamodeld in Sources */,
+				CAF2631F22BCDA0000AA164C /* AttachPhotoViewController.swift in Sources */,
 				CAF2631022BCBA1500AA164C /* CoreDataManager.swift in Sources */,
 				CAF262DF22BCB69800AA164C /* AppDelegate.swift in Sources */,
 				CAF2631722BCC10700AA164C /* NotesCollectionViewCell.swift in Sources */,

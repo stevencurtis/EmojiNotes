@@ -71,4 +71,15 @@ class CoreDataManager: CoreDataManagerProtocol {
         }
     }
     
+    func saveContext () {
+        guard managedObjectContext.hasChanges else { return }
+        
+        do {
+            try managedObjectContext.save()
+        } catch let error as NSError {
+            print("Unresolved error \(error), \(error.userInfo)")
+        }
+    }
+
+    
 }
