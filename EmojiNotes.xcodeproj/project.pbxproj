@@ -8,13 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		CAF262DF22BCB69800AA164C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF262DE22BCB69800AA164C /* AppDelegate.swift */; };
-		CAF262E122BCB69800AA164C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF262E022BCB69800AA164C /* ViewController.swift */; };
+		CAF262E122BCB69800AA164C /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF262E022BCB69800AA164C /* NotesViewController.swift */; };
 		CAF262E422BCB69800AA164C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAF262E222BCB69800AA164C /* Main.storyboard */; };
 		CAF262E722BCB69800AA164C /* EmojiNotes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CAF262E522BCB69800AA164C /* EmojiNotes.xcdatamodeld */; };
 		CAF262E922BCB69C00AA164C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAF262E822BCB69C00AA164C /* Assets.xcassets */; };
 		CAF262EC22BCB69C00AA164C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAF262EA22BCB69C00AA164C /* LaunchScreen.storyboard */; };
 		CAF262F722BCB69C00AA164C /* EmojiNotesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF262F622BCB69C00AA164C /* EmojiNotesTests.swift */; };
 		CAF2630222BCB69C00AA164C /* EmojiNotesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2630122BCB69C00AA164C /* EmojiNotesUITests.swift */; };
+		CAF2631022BCBA1500AA164C /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2630F22BCBA1500AA164C /* CoreDataManager.swift */; };
+		CAF2631222BCBA4300AA164C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2631122BCBA4300AA164C /* Constants.swift */; };
+		CAF2631422BCBBA000AA164C /* NotesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2631322BCBBA000AA164C /* NotesViewModel.swift */; };
+		CAF2631722BCC10700AA164C /* NotesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2631522BCC10600AA164C /* NotesCollectionViewCell.swift */; };
+		CAF2631822BCC10700AA164C /* NotesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAF2631622BCC10600AA164C /* NotesCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +42,7 @@
 /* Begin PBXFileReference section */
 		CAF262DB22BCB69800AA164C /* EmojiNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmojiNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAF262DE22BCB69800AA164C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CAF262E022BCB69800AA164C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CAF262E022BCB69800AA164C /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
 		CAF262E322BCB69800AA164C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CAF262E622BCB69800AA164C /* EmojiNotes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EmojiNotes.xcdatamodel; sourceTree = "<group>"; };
 		CAF262E822BCB69C00AA164C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +54,11 @@
 		CAF262FD22BCB69C00AA164C /* EmojiNotesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmojiNotesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAF2630122BCB69C00AA164C /* EmojiNotesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiNotesUITests.swift; sourceTree = "<group>"; };
 		CAF2630322BCB69C00AA164C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CAF2630F22BCBA1500AA164C /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		CAF2631122BCBA4300AA164C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		CAF2631322BCBBA000AA164C /* NotesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewModel.swift; sourceTree = "<group>"; };
+		CAF2631522BCC10600AA164C /* NotesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesCollectionViewCell.swift; sourceTree = "<group>"; };
+		CAF2631622BCC10600AA164C /* NotesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotesCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,8 +110,12 @@
 			isa = PBXGroup;
 			children = (
 				CAF262DE22BCB69800AA164C /* AppDelegate.swift */,
-				CAF262E022BCB69800AA164C /* ViewController.swift */,
+				CAF2631B22BCCE6000AA164C /* ViewControllers */,
+				CAF2631A22BCCE5500AA164C /* ViewModels */,
 				CAF262E222BCB69800AA164C /* Main.storyboard */,
+				CAF2631922BCC9F000AA164C /* CollectionViewCell */,
+				CAF2630F22BCBA1500AA164C /* CoreDataManager.swift */,
+				CAF2631122BCBA4300AA164C /* Constants.swift */,
 				CAF262E822BCB69C00AA164C /* Assets.xcassets */,
 				CAF262EA22BCB69C00AA164C /* LaunchScreen.storyboard */,
 				CAF262ED22BCB69C00AA164C /* Info.plist */,
@@ -126,6 +140,31 @@
 				CAF2630322BCB69C00AA164C /* Info.plist */,
 			);
 			path = EmojiNotesUITests;
+			sourceTree = "<group>";
+		};
+		CAF2631922BCC9F000AA164C /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				CAF2631522BCC10600AA164C /* NotesCollectionViewCell.swift */,
+				CAF2631622BCC10600AA164C /* NotesCollectionViewCell.xib */,
+			);
+			path = CollectionViewCell;
+			sourceTree = "<group>";
+		};
+		CAF2631A22BCCE5500AA164C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				CAF2631322BCBBA000AA164C /* NotesViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		CAF2631B22BCCE6000AA164C /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CAF262E022BCB69800AA164C /* NotesViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +271,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAF2631822BCC10700AA164C /* NotesCollectionViewCell.xib in Resources */,
 				CAF262EC22BCB69C00AA164C /* LaunchScreen.storyboard in Resources */,
 				CAF262E922BCB69C00AA164C /* Assets.xcassets in Resources */,
 				CAF262E422BCB69800AA164C /* Main.storyboard in Resources */,
@@ -259,9 +299,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAF262E122BCB69800AA164C /* ViewController.swift in Sources */,
+				CAF2631222BCBA4300AA164C /* Constants.swift in Sources */,
+				CAF262E122BCB69800AA164C /* NotesViewController.swift in Sources */,
+				CAF2631422BCBBA000AA164C /* NotesViewModel.swift in Sources */,
 				CAF262E722BCB69800AA164C /* EmojiNotes.xcdatamodeld in Sources */,
+				CAF2631022BCBA1500AA164C /* CoreDataManager.swift in Sources */,
 				CAF262DF22BCB69800AA164C /* AppDelegate.swift in Sources */,
+				CAF2631722BCC10700AA164C /* NotesCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
