@@ -21,7 +21,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="27e-3j-wwP">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <collectionViewLayout key="collectionViewLayout" id="t29-wR-J4b" customClass="PinterestLayout" customModule="EmojiNotes" customModuleProvider="target"/>
+                                <collectionViewLayout key="collectionViewLayout" id="t29-wR-J4b" customClass="TwoColumnLayout" customModule="EmojiNotes" customModuleProvider="target"/>
                                 <cells/>
                             </collectionView>
                         </subviews>

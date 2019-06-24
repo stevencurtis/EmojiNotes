@@ -13,7 +13,7 @@ protocol TwoColumnLayoutDelegate: class {
   func collectionView(_ collectionView:UICollectionView, imgSize indexPath:IndexPath) -> CGFloat
 }
 
-class PinterestLayout: UICollectionViewLayout {
+class TwoColumnLayout: UICollectionViewLayout {
   weak var delegate: TwoColumnLayoutDelegate!
   
   fileprivate var numberOfColumns = 2
@@ -35,7 +35,9 @@ class PinterestLayout: UICollectionViewLayout {
   }
   
   override func prepare() {
-    guard let collectionView = collectionView, cacheNumberItems != collectionView.numberOfItems(inSection: 0) else { return }
+//    guard let collectionView = collectionView, cacheNumberItems != collectionView.numberOfItems(inSection: 0) else { return }
+    guard let collectionView = collectionView else { return }
+
     // Pre-Calcuate the X Offset for every column, add an array to increment the max Y Offset for each column
     let columnWidth = contentWidth / CGFloat(numberOfColumns)
     var xOffset = [CGFloat]()

@@ -34,12 +34,17 @@ class NotesViewController: UIViewController, UICollectionViewDelegateFlowLayout 
         notesCollectionView.delegate = self
         
         // must also be set in IB
-        if let layout = notesCollectionView?.collectionViewLayout as? PinterestLayout {
+        if let layout = notesCollectionView?.collectionViewLayout as? TwoColumnLayout {
             layout.delegate = self
         }
         
         let nib = UINib(nibName: "NotesCollectionViewCell", bundle: nil);
         notesCollectionView.register(nib, forCellWithReuseIdentifier: "NotesCollectionViewCell")
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        notesCollectionView.collectionViewLayout.invalidateLayout()
     }
     
     @IBAction func basicAdd(_ sender: UIBarButtonItem) {
