@@ -23,7 +23,6 @@ public class NotesViewModel: NSObject {
             managedObjectContext: CoreDataManager().getManagedObjectContext()!,
             sectionNameKeyPath: nil,
             cacheName: nil)
-        
         return fetchedResultsController
     }()
     

@@ -64,7 +64,6 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate {
             print ("Resign this view")
             self.navigationController?.popViewController(animated: true)
         }
-        
     }
     
     func provImage(_ img: UIImage) {
