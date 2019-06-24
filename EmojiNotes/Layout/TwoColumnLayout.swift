@@ -35,7 +35,6 @@ class TwoColumnLayout: UICollectionViewLayout {
   }
   
   override func prepare() {
-//    guard let collectionView = collectionView, cacheNumberItems != collectionView.numberOfItems(inSection: 0) else { return }
     guard let collectionView = collectionView else { return }
 
     // Pre-Calcuate the X Offset for every column, add an array to increment the max Y Offset for each column
@@ -74,10 +73,10 @@ class TwoColumnLayout: UICollectionViewLayout {
   }
   
   override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-    
+
     var visibleLayoutAttributes = [UICollectionViewLayoutAttributes]()
-    
-    // Get the rect details from the cache
+
+    // Get the rectangle details from the cache
     for attributes in cache {
       if attributes.frame.intersects(rect) {
         visibleLayoutAttributes.append(attributes)

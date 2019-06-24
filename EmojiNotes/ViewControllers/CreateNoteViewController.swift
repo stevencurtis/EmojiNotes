@@ -31,23 +31,23 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate {
     }
     
     @IBAction func addCategory(_ sender: UIButton) {
-        
+        let categories : [(category: String, color: UIColor)] = [("Study", UIColor.purple), ("Work", UIColor.green), ("Play", UIColor.red)]
+        // + UserDefaults categories here
         let sheet = UIAlertController(title: "Add Category", message: nil, preferredStyle: .actionSheet)
-        let study = UIAlertAction(title: "Study", style: .default, handler: { action in
-            self.categoryColour = UIColor.purple
-            self.category = "Study"
+        
+        for catagory in categories {
+            let cat = UIAlertAction(title: catagory.category, style: .default, handler: { action in
+                self.categoryColour = catagory.color
+                self.category = catagory.category
+            }
+            )
+            sheet.addAction(cat)
+            
         }
-        )
         
-        let work = UIAlertAction(title: "Work", style: .default, handler: { action in
-            self.categoryColour = UIColor.blue
-            self.category = "Work"
-        }
-        )
-        
-        sheet.addAction(study)
-        sheet.addAction(work)
-        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        sheet.addAction(cancel)
+
         self.present(sheet, animated: true, completion: nil)
 
     }
@@ -61,7 +61,6 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate {
         createNoteViewModel = CreateNoteViewModel()
         
         createNoteViewModel?.modelDidChange = {
-            print ("Resign this view")
             self.navigationController?.popViewController(animated: true)
         }
     }

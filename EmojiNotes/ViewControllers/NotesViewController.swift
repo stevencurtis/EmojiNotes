@@ -13,6 +13,9 @@ class NotesViewController: UIViewController, UICollectionViewDelegateFlowLayout 
     
     var notesViewModel : NotesViewModel?
     
+    @IBOutlet weak var noNotesSV: UIStackView!
+    
+    
     @IBOutlet weak var notesCollectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -27,8 +30,6 @@ class NotesViewController: UIViewController, UICollectionViewDelegateFlowLayout 
         notesViewModel?.fetchNotes()
         
         notesCollectionView.contentInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-        
-        
         
         notesCollectionView.dataSource = self
         notesCollectionView.delegate = self
@@ -59,23 +60,42 @@ class NotesViewController: UIViewController, UICollectionViewDelegateFlowLayout 
         
         CoreDataManager().saveContext()
 
+
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showNote" {
+            if let destination = segue.destination as? ViewNoteViewController {
+                if let note = notesViewModel?.fetchedResultsController.object(at: (sender as! IndexPath) ) {
+                    destination.note = SimpleNote(content: note.contents, image: (note.picture?.picture != nil) ? UIImage(data: note.picture!.picture!) : UIImage(named: "TP")  , title: note.title )
+                }
+            }
+        }
     }
 }
 
 extension NotesViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (notesViewModel?.fetchedResultsController.sections![0].numberOfObjects)!
+        if let numberResults = (notesViewModel?.fetchedResultsController.sections![0].numberOfObjects) {
+            (numberResults == 0) ? (noNotesSV.isHidden = false) : (noNotesSV.isHidden = true)
+            return numberResults
+        }
+        noNotesSV.isHidden = false
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NotesCollectionViewCell", for: indexPath) as! NotesCollectionViewCell
         
         if let note = notesViewModel?.fetchedResultsController.object(at: indexPath) {
+            
+            let colour = note.category?.color
+
             // configure the cell with the note
-            if let picture = note.picture?.picture{
-                cell.configure(title: note.title ?? "Untitled", colour: UIColor.blue, image: UIImage(data: picture )  )
+            if let picture = note.picture?.picture{                
+                cell.configure(title: note.title ?? "Untitled", colour: (colour as? UIColor) ?? UIColor.blue, image: UIImage(data: picture )  )
             } else {
-                cell.configure(title: note.title ?? "Untitled", colour: UIColor.orange)
+                cell.configure(title: note.title ?? "Untitled", colour: (colour as? UIColor) ?? UIColor.orange)
             }
         }
         return cell
@@ -84,6 +104,10 @@ extension NotesViewController: UICollectionViewDataSource {
 }
 
 extension NotesViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showNote", sender: indexPath)
+    }
     
 }
 

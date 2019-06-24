@@ -23,15 +23,25 @@ public class CreateNoteViewModel {
     }
     
     func addNote(with title: String, img: UIImage? = nil, colour: UIColor? = nil, catagoryName: String? = nil) {
-        let note = Note(context: CoreDataManager().getManagedObjectContext()!)
+        
+        guard let moc = CoreDataManager().getManagedObjectContext() else {return}
+        
+        let note = Note(context: moc)
         note.contents = "Note contents"
         note.title = title
         note.createdAt = Date()
-        CoreDataManager().saveContext()
 
-        let notePicture = NotePicture(context: CoreDataManager().getManagedObjectContext()!)
+        let notePicture = NotePicture(context: moc)
         notePicture.picture = img?.pngData()
         notePicture.note = note
+        
+        let category = Category(context: moc)
+        category.name = catagoryName
+        category.color = colour
+        note.category = category
+        
+        CoreDataManager().saveContext()
+
     }
     
 }
