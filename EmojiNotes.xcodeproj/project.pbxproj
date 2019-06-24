@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CAA6356522C08F65006C8C1F /* TwoColumnLayoutDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA6356422C08F65006C8C1F /* TwoColumnLayoutDelegate.swift */; };
 		CAF262DF22BCB69800AA164C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF262DE22BCB69800AA164C /* AppDelegate.swift */; };
 		CAF262E122BCB69800AA164C /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF262E022BCB69800AA164C /* NotesViewController.swift */; };
 		CAF262E422BCB69800AA164C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAF262E222BCB69800AA164C /* Main.storyboard */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CAA6356422C08F65006C8C1F /* TwoColumnLayoutDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoColumnLayoutDelegate.swift; sourceTree = "<group>"; };
 		CAF262DB22BCB69800AA164C /* EmojiNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmojiNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAF262DE22BCB69800AA164C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CAF262E022BCB69800AA164C /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +94,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CAA6356622C093CF006C8C1F /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				CAA6356422C08F65006C8C1F /* TwoColumnLayoutDelegate.swift */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
 		CAF262D222BCB69800AA164C = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +129,7 @@
 				CAF2631B22BCCE6000AA164C /* ViewControllers */,
 				CAF2631A22BCCE5500AA164C /* ViewModels */,
 				CAF262E222BCB69800AA164C /* Main.storyboard */,
+				CAA6356622C093CF006C8C1F /* Layout */,
 				CAF2631E22BCDA0000AA164C /* AttachPhotoViewController.swift */,
 				CAF2631922BCC9F000AA164C /* CollectionViewCell */,
 				CAF2630F22BCBA1500AA164C /* CoreDataManager.swift */,
@@ -317,6 +328,7 @@
 				CAF2631F22BCDA0000AA164C /* AttachPhotoViewController.swift in Sources */,
 				CAF2631022BCBA1500AA164C /* CoreDataManager.swift in Sources */,
 				CAF262DF22BCB69800AA164C /* AppDelegate.swift in Sources */,
+				CAA6356522C08F65006C8C1F /* TwoColumnLayoutDelegate.swift in Sources */,
 				CAF2631722BCC10700AA164C /* NotesCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

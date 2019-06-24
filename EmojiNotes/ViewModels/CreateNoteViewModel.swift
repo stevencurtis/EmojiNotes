@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 public class CreateNoteViewModel {
     init() {
@@ -14,12 +15,16 @@ public class CreateNoteViewModel {
     }
     
     
-    func addNote() {
+    func addNote(with title: String, img: UIImage? = nil) {
         let note = Note(context: CoreDataManager().getManagedObjectContext()!)
         note.contents = "Note contents"
-        note.title = "Note title"
+        note.title = title
         note.createdAt = Date()
         CoreDataManager().saveContext()
+        
+        let notePicture = NotePicture(context: CoreDataManager().getManagedObjectContext()!)
+        notePicture.picture = img?.pngData()
+        notePicture.note = note
     }
     
 }

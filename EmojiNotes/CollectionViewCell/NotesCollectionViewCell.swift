@@ -15,5 +15,15 @@ class NotesCollectionViewCell: UICollectionViewCell {
         self.layer.cornerRadius = 8
         self.clipsToBounds = true
     }
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    @IBOutlet weak var view: UIView!
+    @IBOutlet weak var imageView: UIImageView!
+    
+    func configure(title: String, colour: UIColor, image: UIImage? = nil) {
+        titleLabel.text = title
+        imageView.image = image
+        view.backgroundColor = colour
+    }
 
 }

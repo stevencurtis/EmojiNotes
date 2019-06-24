@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class NotesViewController: UIViewController {
+class NotesViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     
     var notesViewModel : NotesViewModel?
     
@@ -26,16 +26,23 @@ class NotesViewController: UIViewController {
         
         notesViewModel?.fetchNotes()
         
+        notesCollectionView.contentInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        
+        
+        
         notesCollectionView.dataSource = self
         notesCollectionView.delegate = self
-
+        
+        // must also be set in IB
+        if let layout = notesCollectionView?.collectionViewLayout as? PinterestLayout {
+            layout.delegate = self
+        }
+        
         let nib = UINib(nibName: "NotesCollectionViewCell", bundle: nil);
         notesCollectionView.register(nib, forCellWithReuseIdentifier: "NotesCollectionViewCell")
     }
+
     
-//    @IBAction func addNote(_ sender: UIBarButtonItem) {
-//        notesViewModel?.addNote()
-//    }
 }
 
 extension NotesViewController: UICollectionViewDataSource {
@@ -44,24 +51,38 @@ extension NotesViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NotesCollectionViewCell", for: indexPath)
-        cell.backgroundColor = .green
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NotesCollectionViewCell", for: indexPath) as! NotesCollectionViewCell
         
         if let note = notesViewModel?.fetchedResultsController.object(at: indexPath) {
             // configure the cell with the note
-            print (
-            note.title,
-            note.createdAt
-
-            )
+            if let picture = note.picture?.picture{
+                cell.configure(title: note.title ?? "Untitled", colour: UIColor.blue, image: UIImage(data: picture )  )
+            } else {
+                cell.configure(title: note.title ?? "Untitled", colour: UIColor.orange)
+            }
+//            cell.backgroundColor = .green
         }
         return cell
     }
+
 }
 
 extension NotesViewController: UICollectionViewDelegate {
     
 }
 
+//MARK: - TwoColumnLayoutDelegate
+extension NotesViewController : TwoColumnLayoutDelegate {
+    func collectionView(_ collectionView: UICollectionView, imgSize indexPath:IndexPath) -> CGFloat {
+        if let note = notesViewModel?.fetchedResultsController.object(at: indexPath) {
+            if let _ = note.picture?.picture{
+                return 100
+            }
+            return 25
+        }
+        return 0
+    }
+    
+}
 
 

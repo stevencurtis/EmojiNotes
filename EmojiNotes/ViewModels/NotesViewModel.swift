@@ -29,8 +29,6 @@ public class NotesViewModel: NSObject {
         return fetchedResultsController
     }()
     
-
-    
     public func fetchNotes() {
         do {
             try self.fetchedResultsController.performFetch()
@@ -39,9 +37,7 @@ public class NotesViewModel: NSObject {
             print("\(error), \(error.localizedDescription)")
         }
     }
-    
-    
-    
+
     override init() {
         super.init()
         fetchedResultsController.delegate = self

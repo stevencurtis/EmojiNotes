@@ -18,7 +18,6 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate {
     var image : UIImage?
     
     @IBOutlet weak var imageView: UIImageView!
-    
     @IBOutlet weak var inputTextField: UITextField!
     
     var chosenText: String?
@@ -29,9 +28,9 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate {
     }
     
     @IBAction func addNote(_ sender: UIButton) {
-        createNoteViewModel?.addNote()
+//        createNoteViewModel?.addNote()
+        createNoteViewModel?.addNote(with: chosenText ?? "untitled", img: image)
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,12 +55,8 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate {
             }
         }
     }
-
-
     
     @IBAction func attachImage(_ sender: UIButton) {
     }
     
-
-
 }
