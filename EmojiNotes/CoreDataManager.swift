@@ -73,7 +73,9 @@ class CoreDataManager: CoreDataManagerProtocol {
     
     func saveContext () {
         guard managedObjectContext.hasChanges else { return }
-        
+        // inform listeners that we have updated the model
+        NotificationCenter.default.post(name: Notification.Name.dataModelDidUpdateNotification, object: self, userInfo: nil)
+
         do {
             try managedObjectContext.save()
         } catch let error as NSError {

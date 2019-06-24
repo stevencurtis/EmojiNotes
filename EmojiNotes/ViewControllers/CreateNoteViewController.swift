@@ -22,27 +22,55 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate {
     
     var chosenText: String?
     
+    var category: String?
+    var categoryColour: UIColor?
+    
     @IBAction func textViewDone(_ sender: UITextField) {
         chosenText = inputTextField.text
         sender.resignFirstResponder()
     }
     
+    @IBAction func addCategory(_ sender: UIButton) {
+        
+        let sheet = UIAlertController(title: "Add Category", message: nil, preferredStyle: .actionSheet)
+        let study = UIAlertAction(title: "Study", style: .default, handler: { action in
+            self.categoryColour = UIColor.purple
+            self.category = "Study"
+        }
+        )
+        
+        let work = UIAlertAction(title: "Work", style: .default, handler: { action in
+            self.categoryColour = UIColor.blue
+            self.category = "Work"
+        }
+        )
+        
+        sheet.addAction(study)
+        sheet.addAction(work)
+        
+        self.present(sheet, animated: true, completion: nil)
+
+    }
+    
     @IBAction func addNote(_ sender: UIButton) {
-//        createNoteViewModel?.addNote()
-        createNoteViewModel?.addNote(with: chosenText ?? "untitled", img: image)
+        createNoteViewModel?.addNote(with: chosenText ?? "untitled", img: image, colour: categoryColour, catagoryName: category)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         createNoteViewModel = CreateNoteViewModel()
+        
+        createNoteViewModel?.modelDidChange = {
+            print ("Resign this view")
+            self.navigationController?.popViewController(animated: true)
+        }
+        
     }
     
     func provImage(_ img: UIImage) {
         image = img
         imageView.image = img
     }
-    
-    // selectImg
     
     @IBAction func attachImg(_ sender: UIButton) {
         performSegue(withIdentifier: "selectImg", sender: sender)

@@ -41,8 +41,20 @@ class NotesViewController: UIViewController, UICollectionViewDelegateFlowLayout 
         let nib = UINib(nibName: "NotesCollectionViewCell", bundle: nil);
         notesCollectionView.register(nib, forCellWithReuseIdentifier: "NotesCollectionViewCell")
     }
-
     
+    @IBAction func basicAdd(_ sender: UIBarButtonItem) {
+        let note = Note(context: CoreDataManager().getManagedObjectContext()!)
+        note.contents = "Add contents"
+        note.title = "Add title"
+        note.createdAt = Date()
+        
+        let notePicture = NotePicture(context: CoreDataManager().getManagedObjectContext()!)
+        notePicture.picture = UIImage(named: "PT")!.pngData()
+        notePicture.note = note
+        
+        CoreDataManager().saveContext()
+
+    }
 }
 
 extension NotesViewController: UICollectionViewDataSource {
@@ -60,7 +72,6 @@ extension NotesViewController: UICollectionViewDataSource {
             } else {
                 cell.configure(title: note.title ?? "Untitled", colour: UIColor.orange)
             }
-//            cell.backgroundColor = .green
         }
         return cell
     }

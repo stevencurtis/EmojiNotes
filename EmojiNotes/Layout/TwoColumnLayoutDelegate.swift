@@ -20,6 +20,7 @@ class PinterestLayout: UICollectionViewLayout {
   fileprivate var cellPadding: CGFloat = 6
   
   fileprivate var cache = [UICollectionViewLayoutAttributes]()
+  fileprivate var cacheNumberItems = 0
   
   fileprivate var contentHeight: CGFloat = 0
   
@@ -34,7 +35,7 @@ class PinterestLayout: UICollectionViewLayout {
   }
   
   override func prepare() {
-    guard cache.isEmpty == true, let collectionView = collectionView else { return }
+    guard let collectionView = collectionView, cacheNumberItems != collectionView.numberOfItems(inSection: 0) else { return }
     // Pre-Calcuate the X Offset for every column, add an array to increment the max Y Offset for each column
     let columnWidth = contentWidth / CGFloat(numberOfColumns)
     var xOffset = [CGFloat]()
@@ -66,6 +67,8 @@ class PinterestLayout: UICollectionViewLayout {
       
       column = column < (numberOfColumns - 1) ? (column + 1) : 0
     }
+    
+    cacheNumberItems = collectionView.numberOfItems(inSection: 0)
   }
   
   override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {

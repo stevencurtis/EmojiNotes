@@ -21,7 +21,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="27e-3j-wwP">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <collectionViewLayout key="collectionViewLayout" id="ABR-Nz-AdX" customClass="PinterestLayout" customModule="EmojiNotes" customModuleProvider="target"/>
+                                <collectionViewLayout key="collectionViewLayout" id="t29-wR-J4b" customClass="PinterestLayout" customModule="EmojiNotes" customModuleProvider="target"/>
                                 <cells/>
                             </collectionView>
                         </subviews>
@@ -35,6 +35,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="mFo-qe-hS9">
+                        <barButtonItem key="leftBarButtonItem" title="Simple Add" id="LH7-wy-iOb">
+                            <connections>
+                                <action selector="basicAdd:" destination="BYZ-38-t0r" id="SJI-UZ-RJ9"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="CUc-Ku-Y2r">
                             <connections>
                                 <segue destination="fns-YX-XiB" kind="show" id="oVL-Tr-gyu"/>
@@ -85,6 +90,14 @@
                                 <state key="normal" title="Add Note"/>
                                 <connections>
                                     <action selector="addNote:" destination="fns-YX-XiB" eventType="touchUpInside" id="dKz-Cc-420"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iq1-Fn-DtU">
+                                <rect key="frame" x="161" y="450" width="92" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add category"/>
+                                <connections>
+                                    <action selector="addCategory:" destination="fns-YX-XiB" eventType="touchUpInside" id="RP9-m4-LMR"/>
                                 </connections>
                             </button>
                         </subviews>

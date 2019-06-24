@@ -9,13 +9,12 @@
 import Foundation
 import CoreData
 
-// inherit from NSObject o conform to NSFetchedResultsControllerDelegate
+// inherit from NSObject to conform to NSFetchedResultsControllerDelegate
 public class NotesViewModel: NSObject {
 
     public var modelDidChange: (()->Void)?
     
     lazy var fetchedResultsController: NSFetchedResultsController<Note> = {
-
         let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
         let fetchSort = NSSortDescriptor(key: #keyPath(Note.createdAt), ascending: true)
         fetchRequest.sortDescriptors = [fetchSort]
@@ -24,7 +23,6 @@ public class NotesViewModel: NSObject {
             managedObjectContext: CoreDataManager().getManagedObjectContext()!,
             sectionNameKeyPath: nil,
             cacheName: nil)
-        
         
         return fetchedResultsController
     }()
@@ -42,14 +40,11 @@ public class NotesViewModel: NSObject {
         super.init()
         fetchedResultsController.delegate = self
     }
-    
 }
 
 extension NotesViewModel: NSFetchedResultsControllerDelegate {
     public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        notes = [fetchedResultsController.object(at: IndexPath(row: 0, section: 0))]
         modelDidChange!()
-
     }
     
 }
