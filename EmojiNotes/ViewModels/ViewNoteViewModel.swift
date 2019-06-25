@@ -8,8 +8,12 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 
 public class ViewNoteViewModel {
-
+    func update(note: Note, with category: Category) {
+        note.setValue(category, forKey: "category")
+        CoreDataManager().saveContext()
+    }
 }

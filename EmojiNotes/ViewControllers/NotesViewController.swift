@@ -43,6 +43,10 @@ class NotesViewController: UIViewController, UICollectionViewDelegateFlowLayout 
         notesCollectionView.register(nib, forCellWithReuseIdentifier: "NotesCollectionViewCell")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.notesCollectionView.reloadData()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         notesCollectionView.collectionViewLayout.invalidateLayout()
@@ -59,15 +63,14 @@ class NotesViewController: UIViewController, UICollectionViewDelegateFlowLayout 
         notePicture.note = note
         
         CoreDataManager().saveContext()
-
-
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showNote" {
             if let destination = segue.destination as? ViewNoteViewController {
                 if let note = notesViewModel?.fetchedResultsController.object(at: (sender as! IndexPath) ) {
-                    destination.note = SimpleNote(content: note.contents, image: (note.picture?.picture != nil) ? UIImage(data: note.picture!.picture!) : UIImage(named: "TP")  , title: note.title )
+                   // destination.note = SimpleNote(content: note.contents, image: (note.picture?.picture != nil) ? UIImage(data: note.picture!.picture!) : UIImage(named: "TP"), title: note.title, categoryName: note.category?.name, categoryColor: note.category?.color as? UIColor)
+                    destination.note = note
                 }
             }
         }

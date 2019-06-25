@@ -24,6 +24,9 @@ class NotesCollectionViewCell: UICollectionViewCell {
         titleLabel.text = title
         imageView.image = image
         view.backgroundColor = colour
+        
+        let textColor = colour.isDarkColor ? UIColor.white : UIColor.black
+        titleLabel.textColor = textColor
     }
 
 }

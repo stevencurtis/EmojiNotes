@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 public class CategoriesTableViewModel: NSObject {
     
@@ -38,6 +39,23 @@ public class CategoriesTableViewModel: NSObject {
         super.init()
         fetchedResultsController.delegate = self
     }
+    
+    func addCategory(with name: String, colour: UIColor) {
+        guard let moc = CoreDataManager().getManagedObjectContext() else {return}
+        let category = Category(context: moc)
+        category.name = name
+        category.color = colour
+        CoreDataManager().saveContext()
+    }
+    
+    
+    func updateCategory(with category: Category, name: String, colour: UIColor) {
+        category.setValue(colour, forKey: "color")
+        category.setValue(name, forKey: "name")
+        CoreDataManager().saveContext()
+
+    }
+    
 }
 
 extension CategoriesTableViewModel: NSFetchedResultsControllerDelegate {

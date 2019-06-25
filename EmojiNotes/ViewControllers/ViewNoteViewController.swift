@@ -8,18 +8,19 @@
 
 import UIKit
 
-public struct SimpleNote {
-    var content: String?
-    var image: UIImage?
-    var title: String?
+protocol CategoryViewNote {
+    func updateCategories(category: Category)
 }
 
-class ViewNoteViewController: UIViewController {
+class ViewNoteViewController: UIViewController, CategoryViewNote {
     var viewNoteViewModel : ViewNoteViewModel?
-    var note: SimpleNote?
+//    var note: SimpleNote?
+    var note: Note?
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
-    
+    @IBOutlet weak var colourLabel: UILabel!
+    @IBOutlet weak var categoryLabel: UILabel!
+        
     @IBAction func editButton(_ sender: UIButton) {
         performSegue(withIdentifier: "editCategories", sender: sender)
     }
@@ -28,18 +29,49 @@ class ViewNoteViewController: UIViewController {
         if segue.identifier == "editCategories" {
             if let destination = segue.destination as? CategoriesTableViewController {
                 destination.selectedCategory = "AA"
+                destination.delegate = self
             }
-            
         }
     }
+    
+    func updateCategories(category: Category) {
+        if let note = note {
+            viewNoteViewModel?.update(note: note, with: category)
+        }
+        self.note?.category = category
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let note = note {
+            if let img = note.picture?.picture {
+                imageView.image = UIImage(data: img)
+            }
+            titleLabel.text = note.title
+            if let noteColor = note.category?.color as? UIColor {
+                colourLabel.text = noteColor.name
+                colourLabel.backgroundColor = noteColor
+                let textColor = noteColor.isDarkColor ? UIColor.white : UIColor.black
+                colourLabel.textColor = textColor
+            }
+            categoryLabel.text = (note.category?.name ?? "No category name")
+            
+        }
+//        if let note = note {
+//            imageView.image = note.image
+//            titleLabel.text = note.title
+//            if let noteColor = note.categoryColor {
+//                colourLabel.text = noteColor.name
+//                colourLabel.backgroundColor = noteColor
+//                let textColor = noteColor.isDarkColor ? UIColor.white : UIColor.black
+//                colourLabel.textColor = textColor
+//            }
+//            categoryLabel.text = (note.categoryName ?? "No category name")
+//        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewNoteViewModel = ViewNoteViewModel()
-        
-        if let note = note {
-            imageView.image = note.image
-            titleLabel.text = note.title
-        }
 
     }
     
