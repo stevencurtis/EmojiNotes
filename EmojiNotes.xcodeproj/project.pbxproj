@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CA7D4BCA22C2037B0024D348 /* SimpleNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7D4BC922C2037B0024D348 /* SimpleNote.swift */; };
+		CA7D4BCD22C238EC0024D348 /* UITextView - doneAccessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7D4BCC22C238EC0024D348 /* UITextView - doneAccessory.swift */; };
 		CAA6356522C08F65006C8C1F /* TwoColumnLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA6356422C08F65006C8C1F /* TwoColumnLayout.swift */; };
 		CAA6356822C099A5006C8C1F /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA6356722C099A5006C8C1F /* NotificationName.swift */; };
 		CAA6356B22C0B9A9006C8C1F /* ViewNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA6356A22C0B9A9006C8C1F /* ViewNoteViewController.swift */; };
@@ -54,6 +55,7 @@
 
 /* Begin PBXFileReference section */
 		CA7D4BC922C2037B0024D348 /* SimpleNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleNote.swift; sourceTree = "<group>"; };
+		CA7D4BCC22C238EC0024D348 /* UITextView - doneAccessory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView - doneAccessory.swift"; sourceTree = "<group>"; };
 		CAA6356422C08F65006C8C1F /* TwoColumnLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoColumnLayout.swift; sourceTree = "<group>"; };
 		CAA6356722C099A5006C8C1F /* NotificationName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		CAA6356A22C0B9A9006C8C1F /* ViewNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewNoteViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				CAA6356722C099A5006C8C1F /* NotificationName.swift */,
 				CAA6357222C0DB41006C8C1F /* UIColor - isDarkColor.swift */,
 				CAA6357422C0DBF8006C8C1F /* UIColor - name.swift */,
+				CA7D4BCC22C238EC0024D348 /* UITextView - doneAccessory.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -210,8 +213,8 @@
 		CAF2631A22BCCE5500AA164C /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				CAF2631322BCBBA000AA164C /* NotesViewModel.swift */,
 				CAF2632022BCE14F00AA164C /* CreateNoteViewModel.swift */,
+				CAF2631322BCBBA000AA164C /* NotesViewModel.swift */,
 				CAA6356C22C0B9E7006C8C1F /* ViewNoteViewModel.swift */,
 				CAA6357022C0C703006C8C1F /* CategoriesTableViewModel.swift */,
 			);
@@ -368,6 +371,7 @@
 				CA7D4BCA22C2037B0024D348 /* SimpleNote.swift in Sources */,
 				CAF2631222BCBA4300AA164C /* Constants.swift in Sources */,
 				CAA6357122C0C703006C8C1F /* CategoriesTableViewModel.swift in Sources */,
+				CA7D4BCD22C238EC0024D348 /* UITextView - doneAccessory.swift in Sources */,
 				CAA6356D22C0B9E7006C8C1F /* ViewNoteViewModel.swift in Sources */,
 				CAF262E122BCB69800AA164C /* NotesViewController.swift in Sources */,
 				CAA6357722C0DEEE006C8C1F /* AddCategoryViewController.swift in Sources */,

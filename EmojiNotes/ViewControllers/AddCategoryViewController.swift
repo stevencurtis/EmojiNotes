@@ -15,6 +15,8 @@ class AddCategoryViewController: UIViewController {
     var newCategory: String?
     var newColor: UIColor?
     
+    var delegate: ChosenCategoryDelegate?
+    
     @IBOutlet weak var addCategoryButton: UIButton!
     @IBOutlet weak var existingColour: UILabel!
     @IBOutlet weak var existingCategory: UILabel!
@@ -84,6 +86,10 @@ class AddCategoryViewController: UIViewController {
             categoriesTableViewModel?.addCategory(with: cat, colour: col)
         } else {
             categoriesTableViewModel?.updateCategory(with: currentCategory!, name: cat, colour: col)
+        }
+        if let delegate = delegate {
+            
+            delegate.chosenCategory((categoriesTableViewModel?.buildCategory(with: cat, colour: col))!)
         }
     }
     

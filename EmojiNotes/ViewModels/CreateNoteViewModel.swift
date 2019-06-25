@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 public class CreateNoteViewModel {
     init() {
@@ -22,14 +23,15 @@ public class CreateNoteViewModel {
         }
     }
     
-    func addNote(with title: String, img: UIImage? = nil, colour: UIColor? = nil, catagoryName: String? = nil) {
-        
+    func addNote(with title: String, contents: String, img: UIImage? = nil, colour: UIColor? = nil, catagoryName: String? = nil) {
         guard let moc = CoreDataManager().getManagedObjectContext() else {return}
+        guard contents != "Enter your note" else {return}
         
         let note = Note(context: moc)
-        note.contents = "Note contents"
+        note.contents = ( (contents == "Enter your note") ? "Untitled" : contents )
         note.title = title
         note.createdAt = Date()
+        note.contents = contents
 
         let notePicture = NotePicture(context: moc)
         notePicture.picture = img?.pngData()
@@ -41,7 +43,27 @@ public class CreateNoteViewModel {
         note.category = category
         
         CoreDataManager().saveContext()
-
     }
+    
+    func getCategories(closure : @escaping ((_ result: [Category])->Void) ) {
+        guard let moc = CoreDataManager().getManagedObjectContext() else {return}
+        let commitFetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
+        
+        let asyncFetchRequest = NSAsynchronousFetchRequest<Category>(
+        fetchRequest: commitFetchRequest) { (result: NSAsynchronousFetchResult) in
+            guard let categories = result.finalResult else {
+                return
+            }
+            closure(categories)
+        }
+        
+        do {
+            try moc.execute(asyncFetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+        
+    }
+
     
 }

@@ -9,11 +9,20 @@
 import UIKit
 
 protocol CreateNoteDelegate {
-    func provImage( _ img: UIImage)
+    func provImage(_ img: UIImage)
 }
 
-class CreateNoteViewController: UIViewController, CreateNoteDelegate {
+protocol ChosenCategoryDelegate {
+    func chosenCategory (_ category: Category)
+}
+
+class CreateNoteViewController: UIViewController, CreateNoteDelegate, ChosenCategoryDelegate, UITextViewDelegate {
     
+    func chosenCategory(_ category: Category) {
+        self.category = category
+    }
+    
+    var category : Category?
     var createNoteViewModel : CreateNoteViewModel?
     var image : UIImage?
     
@@ -22,7 +31,7 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate {
     
     var chosenText: String?
     
-    var category: String?
+    var categoryName: String?
     var categoryColour: UIColor?
     
     @IBAction func textViewDone(_ sender: UITextField) {
@@ -31,30 +40,42 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate {
     }
     
     @IBAction func addCategory(_ sender: UIButton) {
-        let categories : [(category: String, color: UIColor)] = [("Study", UIColor.purple), ("Work", UIColor.green), ("Play", UIColor.red)]
-        // + UserDefaults categories here
-        let sheet = UIAlertController(title: "Add Category", message: nil, preferredStyle: .actionSheet)
         
-        for catagory in categories {
-            let cat = UIAlertAction(title: catagory.category, style: .default, handler: { action in
-                self.categoryColour = catagory.color
-                self.category = catagory.category
+        createNoteViewModel?.getCategories{ categories in
+            print (categories)
+            
+            let sheet = UIAlertController(title: "Select Category", message: nil, preferredStyle: .actionSheet)
+            
+            let newcat = UIAlertAction(title: "Create a new category", style: .default, handler: { action in
+                print ("new selected")
+                //addCat
+                self.performSegue(withIdentifier: "addCat", sender: nil)
             }
             )
-            sheet.addAction(cat)
             
+            for category in categories {
+                let cat = UIAlertAction(title: category.name ?? "unnamed", style: .default, handler: { action in
+                    self.categoryColour = category.color as? UIColor
+                    self.categoryName = category.name
+                }
+                )
+                sheet.addAction(cat)
+            }
+            sheet.addAction(newcat)
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            sheet.addAction(cancel)
+            self.present(sheet, animated: true, completion: nil)
         }
-        
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        sheet.addAction(cancel)
-
-        self.present(sheet, animated: true, completion: nil)
-
     }
     
     @IBAction func addNote(_ sender: UIButton) {
-        createNoteViewModel?.addNote(with: chosenText ?? "untitled", img: image, colour: categoryColour, catagoryName: category)
+        createNoteViewModel?.addNote(with: chosenText ?? "untitled", contents: contentTextView.text, img: image, colour: categoryColour, catagoryName: categoryName)
     }
+    
+    override func willMove(toParent parent: UIViewController?) {
+        createNoteViewModel?.addNote(with: inputTextField.text ?? "untitled", contents: contentTextView.text, img: image, colour: categoryColour, catagoryName: categoryName)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +84,44 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate {
         createNoteViewModel?.modelDidChange = {
             self.navigationController?.popViewController(animated: true)
         }
+        
+        contentTextView.delegate = self
+        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if !self.textViewClearedOnInitialEdit {
+            self.contentTextView.text = ""
+            self.textViewClearedOnInitialEdit = true
+        }
+    }
+    
+    var textViewClearedOnInitialEdit = false
+    
+    @IBOutlet weak var contentTextView: UITextView!
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    @objc func adjustForKeyboard(notification: Notification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+
+        if notification.name == UIResponder.keyboardWillHideNotification {
+            scrollView.contentInset = .zero
+        } else {
+            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height - view.safeAreaInsets.bottom, right: 0)
+        }
+        scrollView.scrollIndicatorInsets = scrollView.contentInset
     }
     
     func provImage(_ img: UIImage) {
@@ -79,6 +138,11 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate {
             if let destination = segue.destination as? AttachPhotoViewController {
                 destination.noteDelegate = self
             }
+        } else {
+            if segue.identifier == "addCat" {
+                if let _ = segue.destination as? AddCategoryViewController {
+                }
+            }
         }
     }
     
@@ -86,3 +150,5 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate {
     }
     
 }
+
+

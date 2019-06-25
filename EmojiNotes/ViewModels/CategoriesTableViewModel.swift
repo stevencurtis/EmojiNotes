@@ -41,11 +41,16 @@ public class CategoriesTableViewModel: NSObject {
     }
     
     func addCategory(with name: String, colour: UIColor) {
-        guard let moc = CoreDataManager().getManagedObjectContext() else {return}
+        let _ = buildCategory(with: name, colour: colour)
+        CoreDataManager().saveContext()
+    }
+    
+    func buildCategory(with name: String, colour: UIColor) -> Category? {
+        guard let moc = CoreDataManager().getManagedObjectContext() else {return nil}
         let category = Category(context: moc)
         category.name = name
         category.color = colour
-        CoreDataManager().saveContext()
+        return category
     }
     
     

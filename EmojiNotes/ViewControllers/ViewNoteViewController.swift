@@ -21,6 +21,8 @@ class ViewNoteViewController: UIViewController, CategoryViewNote {
     @IBOutlet weak var colourLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
         
+    @IBOutlet weak var contentLabel: UILabel!
+    
     @IBAction func editButton(_ sender: UIButton) {
         performSegue(withIdentifier: "editCategories", sender: sender)
     }
@@ -45,8 +47,11 @@ class ViewNoteViewController: UIViewController, CategoryViewNote {
         if let note = note {
             if let img = note.picture?.picture {
                 imageView.image = UIImage(data: img)
+            } else {
+                imageView.isHidden = true
             }
             titleLabel.text = note.title
+            contentLabel.text = note.contents
             if let noteColor = note.category?.color as? UIColor {
                 colourLabel.text = noteColor.name
                 colourLabel.backgroundColor = noteColor
@@ -54,19 +59,8 @@ class ViewNoteViewController: UIViewController, CategoryViewNote {
                 colourLabel.textColor = textColor
             }
             categoryLabel.text = (note.category?.name ?? "No category name")
-            
         }
-//        if let note = note {
-//            imageView.image = note.image
-//            titleLabel.text = note.title
-//            if let noteColor = note.categoryColor {
-//                colourLabel.text = noteColor.name
-//                colourLabel.backgroundColor = noteColor
-//                let textColor = noteColor.isDarkColor ? UIColor.white : UIColor.black
-//                colourLabel.textColor = textColor
-//            }
-//            categoryLabel.text = (note.categoryName ?? "No category name")
-//        }
+
     }
     
     override func viewDidLoad() {

@@ -55,7 +55,8 @@ class CategoriesTableViewController: UITableViewController {
             cell.textLabel?.text = (category.name ?? "No category name")
             cell.detailTextLabel?.text =  (category.color as? UIColor)?.name! // "category.name"
             cell.backgroundColor = (category.color as? UIColor)
-            let textColor = (category.color as? UIColor)!.isDarkColor ? UIColor.white : UIColor.black
+            
+            let textColor = ((category.color as? UIColor) ?? UIColor.black).isDarkColor ? UIColor.white : UIColor.black
             cell.detailTextLabel?.textColor = textColor
             cell.textLabel?.textColor = textColor
             cell.accessoryType = .detailDisclosureButton

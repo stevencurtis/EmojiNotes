@@ -51,25 +51,11 @@ class NotesViewController: UIViewController, UICollectionViewDelegateFlowLayout 
         super.viewDidLayoutSubviews()
         notesCollectionView.collectionViewLayout.invalidateLayout()
     }
-    
-    @IBAction func basicAdd(_ sender: UIBarButtonItem) {
-        let note = Note(context: CoreDataManager().getManagedObjectContext()!)
-        note.contents = "Add contents"
-        note.title = "Add title"
-        note.createdAt = Date()
         
-        let notePicture = NotePicture(context: CoreDataManager().getManagedObjectContext()!)
-        notePicture.picture = UIImage(named: "PT")!.pngData()
-        notePicture.note = note
-        
-        CoreDataManager().saveContext()
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showNote" {
             if let destination = segue.destination as? ViewNoteViewController {
                 if let note = notesViewModel?.fetchedResultsController.object(at: (sender as! IndexPath) ) {
-                   // destination.note = SimpleNote(content: note.contents, image: (note.picture?.picture != nil) ? UIImage(data: note.picture!.picture!) : UIImage(named: "TP"), title: note.title, categoryName: note.category?.name, categoryColor: note.category?.color as? UIColor)
                     destination.note = note
                 }
             }
