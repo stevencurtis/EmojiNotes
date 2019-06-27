@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA3D4C7522C3597C00DF41B2 /* ChooseEmojiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3D4C7422C3597C00DF41B2 /* ChooseEmojiViewController.swift */; };
+		CA3D4C7822C3621000DF41B2 /* EmojiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3D4C7622C3621000DF41B2 /* EmojiCollectionViewCell.swift */; };
+		CA3D4C7922C3621000DF41B2 /* EmojiCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA3D4C7722C3621000DF41B2 /* EmojiCollectionViewCell.xib */; };
+		CA3D4C7B22C3645200DF41B2 /* String - image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3D4C7A22C3645200DF41B2 /* String - image.swift */; };
 		CA7D4BCA22C2037B0024D348 /* SimpleNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7D4BC922C2037B0024D348 /* SimpleNote.swift */; };
 		CA7D4BCD22C238EC0024D348 /* UITextView - doneAccessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7D4BCC22C238EC0024D348 /* UITextView - doneAccessory.swift */; };
 		CAA6356522C08F65006C8C1F /* TwoColumnLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA6356422C08F65006C8C1F /* TwoColumnLayout.swift */; };
@@ -54,6 +58,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CA3D4C7422C3597C00DF41B2 /* ChooseEmojiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseEmojiViewController.swift; sourceTree = "<group>"; };
+		CA3D4C7622C3621000DF41B2 /* EmojiCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCollectionViewCell.swift; sourceTree = "<group>"; };
+		CA3D4C7722C3621000DF41B2 /* EmojiCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmojiCollectionViewCell.xib; sourceTree = "<group>"; };
+		CA3D4C7A22C3645200DF41B2 /* String - image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String - image.swift"; sourceTree = "<group>"; };
 		CA7D4BC922C2037B0024D348 /* SimpleNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleNote.swift; sourceTree = "<group>"; };
 		CA7D4BCC22C238EC0024D348 /* UITextView - doneAccessory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView - doneAccessory.swift"; sourceTree = "<group>"; };
 		CAA6356422C08F65006C8C1F /* TwoColumnLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoColumnLayout.swift; sourceTree = "<group>"; };
@@ -134,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				CAA6356722C099A5006C8C1F /* NotificationName.swift */,
+				CA3D4C7A22C3645200DF41B2 /* String - image.swift */,
 				CAA6357222C0DB41006C8C1F /* UIColor - isDarkColor.swift */,
 				CAA6357422C0DBF8006C8C1F /* UIColor - name.swift */,
 				CA7D4BCC22C238EC0024D348 /* UITextView - doneAccessory.swift */,
@@ -171,7 +180,6 @@
 				CAA6356922C099A9006C8C1F /* Extensions */,
 				CAF262E222BCB69800AA164C /* Main.storyboard */,
 				CAA6356622C093CF006C8C1F /* Layout */,
-				CAF2631E22BCDA0000AA164C /* AttachPhotoViewController.swift */,
 				CAF2631922BCC9F000AA164C /* CollectionViewCell */,
 				CAF2630F22BCBA1500AA164C /* CoreDataManager.swift */,
 				CAF2631122BCBA4300AA164C /* Constants.swift */,
@@ -204,6 +212,8 @@
 		CAF2631922BCC9F000AA164C /* CollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				CA3D4C7622C3621000DF41B2 /* EmojiCollectionViewCell.swift */,
+				CA3D4C7722C3621000DF41B2 /* EmojiCollectionViewCell.xib */,
 				CAF2631522BCC10600AA164C /* NotesCollectionViewCell.swift */,
 				CAF2631622BCC10600AA164C /* NotesCollectionViewCell.xib */,
 			);
@@ -229,6 +239,8 @@
 				CAA6356A22C0B9A9006C8C1F /* ViewNoteViewController.swift */,
 				CAA6356E22C0C0AD006C8C1F /* CategoriesTableViewController.swift */,
 				CAA6357622C0DEEE006C8C1F /* AddCategoryViewController.swift */,
+				CAF2631E22BCDA0000AA164C /* AttachPhotoViewController.swift */,
+				CA3D4C7422C3597C00DF41B2 /* ChooseEmojiViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -341,6 +353,7 @@
 				CAF262EC22BCB69C00AA164C /* LaunchScreen.storyboard in Resources */,
 				CAF262E922BCB69C00AA164C /* Assets.xcassets in Resources */,
 				CAF262E422BCB69800AA164C /* Main.storyboard in Resources */,
+				CA3D4C7922C3621000DF41B2 /* EmojiCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,11 +383,13 @@
 				CAA6356822C099A5006C8C1F /* NotificationName.swift in Sources */,
 				CA7D4BCA22C2037B0024D348 /* SimpleNote.swift in Sources */,
 				CAF2631222BCBA4300AA164C /* Constants.swift in Sources */,
+				CA3D4C7822C3621000DF41B2 /* EmojiCollectionViewCell.swift in Sources */,
 				CAA6357122C0C703006C8C1F /* CategoriesTableViewModel.swift in Sources */,
 				CA7D4BCD22C238EC0024D348 /* UITextView - doneAccessory.swift in Sources */,
 				CAA6356D22C0B9E7006C8C1F /* ViewNoteViewModel.swift in Sources */,
 				CAF262E122BCB69800AA164C /* NotesViewController.swift in Sources */,
 				CAA6357722C0DEEE006C8C1F /* AddCategoryViewController.swift in Sources */,
+				CA3D4C7522C3597C00DF41B2 /* ChooseEmojiViewController.swift in Sources */,
 				CAA6356B22C0B9A9006C8C1F /* ViewNoteViewController.swift in Sources */,
 				CAF2631D22BCD96A00AA164C /* CreateNoteViewController.swift in Sources */,
 				CAF2631422BCBBA000AA164C /* NotesViewModel.swift in Sources */,
@@ -385,6 +400,7 @@
 				CAF262DF22BCB69800AA164C /* AppDelegate.swift in Sources */,
 				CAA6357322C0DB41006C8C1F /* UIColor - isDarkColor.swift in Sources */,
 				CAA6356522C08F65006C8C1F /* TwoColumnLayout.swift in Sources */,
+				CA3D4C7B22C3645200DF41B2 /* String - image.swift in Sources */,
 				CAF2631722BCC10700AA164C /* NotesCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 public protocol CoreDataManagerProtocol {
-    func getTasks() -> [NSManagedObject]
+//    func getTasks() -> [NSManagedObject]
     func save(task: String)
     init()
 }
@@ -40,26 +40,6 @@ class CoreDataManager: CoreDataManagerProtocol {
         entity = NSEntityDescription.entity(forEntityName: Constants.entityName, in: managedObjectContext)!
     }
     
-    func getTasks() -> [NSManagedObject] {
-        
-        if tasks.count > 0 {return tasks}
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: Constants.entityName)
-        do {
-            tasks = try managedObjectContext.fetch(fetchRequest)
-            if tasks.count == 0 {
-                let entityOne = NSEntityDescription.insertNewObject(forEntityName: Constants.entityName, into: managedObjectContext)
-                entityOne.setValue(false, forKey: Constants.entityCompletedattribute)
-                entityOne.setValue("Enter your task", forKey: Constants.entityNameAttribute)
-                tasks.append(entityOne)
-            }
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
-        
-        return tasks
-    }
-    
-    
     func save(task: String) {
         let taskObject = NSManagedObject(entity: entity, insertInto: managedObjectContext)
         taskObject.setValue(task, forKeyPath: Constants.entityNameAttribute)
@@ -73,11 +53,14 @@ class CoreDataManager: CoreDataManagerProtocol {
     
     func saveContext () {
         guard managedObjectContext.hasChanges else { return }
-        // inform listeners that we have updated the model
-        NotificationCenter.default.post(name: Notification.Name.dataModelDidUpdateNotification, object: self, userInfo: nil)
+
 
         do {
             try managedObjectContext.save()
+            
+            // inform listeners that we have updated the model
+            // NotificationCenter.default.post(name: Notification.Name.dataModelDidUpdateNotification, object: self, userInfo: nil)
+            
         } catch let error as NSError {
             print("Unresolved error \(error), \(error.userInfo)")
         }

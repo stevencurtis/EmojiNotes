@@ -16,21 +16,35 @@ protocol ChosenCategoryDelegate {
     func chosenCategory (_ category: Category)
 }
 
-class CreateNoteViewController: UIViewController, CreateNoteDelegate, ChosenCategoryDelegate, UITextViewDelegate {
+protocol ChosenEmojiDelegate {
+    func chosenEmoji (_ emoji: String )
+}
+
+class CreateNoteViewController: UIViewController, CreateNoteDelegate, ChosenCategoryDelegate, UITextViewDelegate, ChosenEmojiDelegate {
+    
+    // ------------ delegates ------------ //
+    func chosenEmoji(_ emoji: String) {
+        self.emoji = emoji
+        emojiLabel.text = emoji
+    }
     
     func chosenCategory(_ category: Category) {
         self.category = category
     }
     
+    var emoji : String?
     var category : Category?
     var createNoteViewModel : CreateNoteViewModel?
     var image : UIImage?
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var inputTextField: UITextField!
+    @IBOutlet weak var contentTextView: UITextView!
+    @IBOutlet weak var emojiLabel: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
     
+    var textViewClearedOnInitialEdit = false
     var chosenText: String?
-    
     var categoryName: String?
     var categoryColour: UIColor?
     
@@ -40,15 +54,10 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate, ChosenCate
     }
     
     @IBAction func addCategory(_ sender: UIButton) {
-        
         createNoteViewModel?.getCategories{ categories in
-            print (categories)
-            
             let sheet = UIAlertController(title: "Select Category", message: nil, preferredStyle: .actionSheet)
             
             let newcat = UIAlertAction(title: "Create a new category", style: .default, handler: { action in
-                print ("new selected")
-                //addCat
                 self.performSegue(withIdentifier: "addCat", sender: nil)
             }
             )
@@ -69,13 +78,15 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate, ChosenCate
     }
     
     @IBAction func addNote(_ sender: UIButton) {
-        createNoteViewModel?.addNote(with: chosenText ?? "untitled", contents: contentTextView.text, img: image, colour: categoryColour, catagoryName: categoryName)
+        createNoteViewModel?.addNote(with: chosenText ?? "untitled", contents: contentTextView.text, emoji: emoji!, img: image, colour: categoryColour, catagoryName: categoryName)
     }
     
-    override func willMove(toParent parent: UIViewController?) {
-        createNoteViewModel?.addNote(with: inputTextField.text ?? "untitled", contents: contentTextView.text, img: image, colour: categoryColour, catagoryName: categoryName)
+    override func willMove(toParent parent: UIViewController?) {        
+        if let emoji = emoji, let category = category {
+            createNoteViewModel?.addNote(with: inputTextField.text ?? "untitled", contents: contentTextView.text, emoji: emoji, img: image, category: category)
+        }
+        
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,11 +116,10 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate, ChosenCate
         }
     }
     
-    var textViewClearedOnInitialEdit = false
-    
-    @IBOutlet weak var contentTextView: UITextView!
-    
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBAction func chooseEmoji(_ sender: UIButton) {
+        performSegue(withIdentifier: "emojiChooser", sender: sender)
+    }
+
     @objc func adjustForKeyboard(notification: Notification) {
         guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         
@@ -140,7 +150,16 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate, ChosenCate
             }
         } else {
             if segue.identifier == "addCat" {
-                if let _ = segue.destination as? AddCategoryViewController {
+                if let destination = segue.destination as? AddCategoryViewController {
+                    destination.delegate = self
+                    
+                }
+            } else {
+                if segue.identifier == "emojiChooser" {
+                    if let destination = segue.destination as? ChooseEmojiViewController
+                    {
+                        destination.delegate = self
+                    }
                 }
             }
         }

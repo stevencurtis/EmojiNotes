@@ -82,9 +82,9 @@ extension NotesViewController: UICollectionViewDataSource {
 
             // configure the cell with the note
             if let picture = note.picture?.picture{                
-                cell.configure(title: note.title ?? "Untitled", colour: (colour as? UIColor) ?? UIColor.blue, image: UIImage(data: picture )  )
+                cell.configure(title: note.title ?? "Untitled", colour: (colour as? UIColor) ?? UIColor.blue, emoji: note.emoji!, image: UIImage(data: picture )  )
             } else {
-                cell.configure(title: note.title ?? "Untitled", colour: (colour as? UIColor) ?? UIColor.orange)
+                cell.configure(title: note.title ?? "Untitled", colour: (colour as? UIColor) ?? UIColor.orange, emoji: note.emoji!)
             }
         }
         return cell

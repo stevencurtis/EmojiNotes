@@ -40,7 +40,7 @@ public class CategoriesTableViewModel: NSObject {
         fetchedResultsController.delegate = self
     }
     
-    func addCategory(with name: String, colour: UIColor) {
+    private func addCategory(with name: String, colour: UIColor) {
         let _ = buildCategory(with: name, colour: colour)
         CoreDataManager().saveContext()
     }

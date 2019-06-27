@@ -48,6 +48,7 @@ class AddCategoryViewController: UIViewController {
                 self.newColor = color
                 if let cat = self.newCategory, let col = self.newColor {
                     self.updateCategory(cat, col)
+//                    delegate?.chosenCategory(<#T##category: Category##Category#>)
                 }
             }
             )
@@ -67,7 +68,6 @@ class AddCategoryViewController: UIViewController {
             if let answer = ac.textFields?[0] {
                 self.existingCategory.text = answer.text
                 self.newCategory = answer.text
-                
                 if let cat = self.newCategory, let col = self.newColor {
                     self.updateCategory(cat, col)
                 }
@@ -83,14 +83,14 @@ class AddCategoryViewController: UIViewController {
     
     func updateCategory(_ cat: String, _ col: UIColor) {
         if currentCategory == nil {
-            categoriesTableViewModel?.addCategory(with: cat, colour: col)
+            let cat = (categoriesTableViewModel?.buildCategory(with: cat, colour: col))!
+            if let delegate = delegate {
+                delegate.chosenCategory(cat)
+            }
         } else {
             categoriesTableViewModel?.updateCategory(with: currentCategory!, name: cat, colour: col)
         }
-        if let delegate = delegate {
-            
-            delegate.chosenCategory((categoriesTableViewModel?.buildCategory(with: cat, colour: col))!)
-        }
+
     }
     
     @IBAction func addCategory(_ sender: UIButton) {
