@@ -113,6 +113,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pf0-46-XAQ">
                                                 <rect key="frame" x="324" y="0.0" width="30" height="58"/>
                                                 <state key="normal" title="Edt"/>
+                                                <connections>
+                                                    <action selector="chooseTitle:" destination="peY-ad-B9B" eventType="touchUpInside" id="PkU-De-H3r"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -159,6 +162,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p2J-nu-PAx">
                                                 <rect key="frame" x="324" y="0.0" width="30" height="33.5"/>
                                                 <state key="normal" title="Edit"/>
+                                                <connections>
+                                                    <action selector="chooseContent:" destination="peY-ad-B9B" eventType="touchUpInside" id="q35-LS-RP1"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>

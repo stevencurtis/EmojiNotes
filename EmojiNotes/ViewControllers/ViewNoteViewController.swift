@@ -15,12 +15,18 @@ protocol CategoryViewNote {
 class ViewNoteViewController: UIViewController, CategoryViewNote, CreateNoteDelegate, ChosenEmojiDelegate {
     func chosenEmoji(_ emoji: String) {
         emojiLabel.text = emoji
+        if let note = note {
+            viewNoteViewModel?.update(note: note, emoji: emoji)
+        }
     }
     
     func provImage(_ img: UIImage) {
         imageView.image = img
         imageLabel.text = "Click to change image"
         imageView.backgroundColor = .clear
+        if let note = note {
+            viewNoteViewModel?.update(note: note, image: img)
+        }
     }
     
     var viewNoteViewModel : ViewNoteViewModel?
@@ -40,6 +46,37 @@ class ViewNoteViewController: UIViewController, CategoryViewNote, CreateNoteDele
     @IBAction func editButton(_ sender: UIButton) {
         performSegue(withIdentifier: "editCategories", sender: sender)
     }
+    
+    @IBAction func chooseTitle(_ sender: UIButton) {
+        let ac = UIAlertController(title: "Enter new title", message: nil, preferredStyle: .alert)
+        ac.addTextField()
+        let submitAction = UIAlertAction(title: "Submit", style: .default) { [unowned ac] _ in
+            if let answer = ac.textFields?[0] {
+                if let note = self.note {
+                    self.viewNoteViewModel?.update(note: note, title: answer.text)
+                    self.titleLabel.text = answer.text
+                }
+            }
+        }
+        ac.addAction(submitAction)
+        present(ac, animated: true)
+    }
+    
+    @IBAction func chooseContent(_ sender: UIButton) {
+        let ac = UIAlertController(title: "Enter your new content", message: nil, preferredStyle: .alert)
+        ac.addTextField()
+        let submitAction = UIAlertAction(title: "Submit", style: .default) { [unowned ac] _ in
+            if let answer = ac.textFields?[0] {
+                if let note = self.note {
+                    self.viewNoteViewModel?.update(note: note, content: answer.text)
+                    self.contentLabel.text = answer.text
+                }
+            }
+        }
+        ac.addAction(submitAction)
+        present(ac, animated: true)
+    }
+
     
     func updateCategories(category: Category) {
         if let note = note {

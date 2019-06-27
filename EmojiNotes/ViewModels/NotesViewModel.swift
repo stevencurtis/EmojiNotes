@@ -15,7 +15,9 @@ public class NotesViewModel: NSObject {
     public var modelDidChange: (()->Void)?
     
     lazy var fetchedResultsController: NSFetchedResultsController<Note> = {
+        
         let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
+        
         let fetchSort = NSSortDescriptor(key: #keyPath(Note.createdAt), ascending: true)
         fetchRequest.sortDescriptors = [fetchSort]
         let fetchedResultsController = NSFetchedResultsController(

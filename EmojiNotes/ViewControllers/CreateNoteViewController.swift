@@ -81,11 +81,13 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate, ChosenCate
     }
     
     @IBAction func addNote(_ sender: UIButton) {
-        createNoteViewModel?.addNote(with: chosenText ?? "untitled", contents: contentTextView.text, emoji: emoji!, img: image, colour: categoryColour, catagoryName: categoryName)
+//        createNoteViewModel?.addNote(with: chosenText ?? "untitled", contents: contentTextView.text, emoji: emoji!, img: image, colour: categoryColour, catagoryName: categoryName)
     }
     
     override func willMove(toParent parent: UIViewController?) {
-        createNoteViewModel?.addNote(with: inputTextField.text ?? "untitled", contents: contentTextView.text, emoji: emoji, img: image, category: category)
+        if parent == nil {
+            createNoteViewModel?.addNote(with: inputTextField.text, contents: contentTextView.text, emoji: emoji, img: image, category: category)
+        }
     }
     
     @objc func addImageView(_ sender:AnyObject){

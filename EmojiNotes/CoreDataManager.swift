@@ -20,14 +20,18 @@ class CoreDataManager: CoreDataManagerProtocol {
     private var tasks = [NSManagedObject]()
 
     private var managedObjectContext: NSManagedObjectContext! = nil
+    
+    private var privateObjectContext: NSManagedObjectContext! = nil
+
+    
     private var entity: NSEntityDescription! = nil
     
     func getManagedObjectContext() -> NSManagedObjectContext? {
         return managedObjectContext
     }
     
-    init (objectContext: NSManagedObjectContext, entity: NSEntityDescription) {
-        self.managedObjectContext = objectContext
+    init (mainObjectContext: NSManagedObjectContext, entity: NSEntityDescription) {
+        self.managedObjectContext = mainObjectContext
         self.entity = entity
     }
     
@@ -36,6 +40,8 @@ class CoreDataManager: CoreDataManagerProtocol {
         // This context is associated directly with the NSPersistentStoreCoordinator and is non-generational by default.
         // This is the managed object context generated as part of the new core data App checkbox!
         managedObjectContext = appDelegate.persistentContainer.viewContext
+        
+        privateObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
 
         entity = NSEntityDescription.entity(forEntityName: Constants.entityName, in: managedObjectContext)!
     }
@@ -54,10 +60,9 @@ class CoreDataManager: CoreDataManagerProtocol {
     func saveContext () {
         guard managedObjectContext.hasChanges else { return }
 
-
         do {
-            try managedObjectContext.save()
             
+            try managedObjectContext.save()
             // inform listeners that we have updated the model
             // NotificationCenter.default.post(name: Notification.Name.dataModelDidUpdateNotification, object: self, userInfo: nil)
             
