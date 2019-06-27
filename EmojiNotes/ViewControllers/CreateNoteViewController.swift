@@ -81,7 +81,7 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate, ChosenCate
         createNoteViewModel?.addNote(with: chosenText ?? "untitled", contents: contentTextView.text, emoji: emoji!, img: image, colour: categoryColour, catagoryName: categoryName)
     }
     
-    override func willMove(toParent parent: UIViewController?) {        
+    override func willMove(toParent parent: UIViewController?) {
         if let emoji = emoji, let category = category {
             createNoteViewModel?.addNote(with: inputTextField.text ?? "untitled", contents: contentTextView.text, emoji: emoji, img: image, category: category)
         }
@@ -90,6 +90,7 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate, ChosenCate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+                
         createNoteViewModel = CreateNoteViewModel()
         
         createNoteViewModel?.modelDidChange = {

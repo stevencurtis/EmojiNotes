@@ -53,11 +53,15 @@ public class CategoriesTableViewModel: NSObject {
         return category
     }
     
-    
     func updateCategory(with category: Category, name: String, colour: UIColor) {
         category.setValue(colour, forKey: "color")
         category.setValue(name, forKey: "name")
         CoreDataManager().saveContext()
+    }
+    
+    func deleteCategory(category: Category) {
+        guard let moc = CoreDataManager().getManagedObjectContext() else {return}
+        moc.delete(category)
 
     }
     

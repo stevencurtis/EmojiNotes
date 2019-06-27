@@ -70,10 +70,17 @@ class CategoriesTableViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            if let category = categoriesTableViewModel?.fetchedResultsController.object(at: indexPath) {
+                categoriesTableViewModel?.deleteCategory(category: category)
+            }
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // deselect (grey) the current cell
         tableView.deselectRow(at: indexPath, animated: true)
-//            performSegue(withIdentifier: "addCategory", sender: nil)
         if let category = categoriesTableViewModel?.fetchedResultsController.object(at: indexPath) {
             // return via delegate to the previous view
             delegate?.updateCategories(category: category)
