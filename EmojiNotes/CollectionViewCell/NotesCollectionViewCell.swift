@@ -20,8 +20,8 @@ class NotesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var view: UIView!
     @IBOutlet weak var imageView: UIImageView!
     
-    func configure(title: String, colour: UIColor, emoji: String, image: UIImage? = nil) {
-        titleLabel.text = emoji + " " + title
+    func configure(title: String, colour: UIColor, emoji: String? = nil, image: UIImage? = nil) {
+        titleLabel.text = emoji ?? "no emoji" + " " + title
         imageView.image = image
         view.backgroundColor = colour
         

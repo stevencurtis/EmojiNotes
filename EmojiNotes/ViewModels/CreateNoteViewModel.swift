@@ -46,7 +46,7 @@ public class CreateNoteViewModel {
         CoreDataManager().saveContext()
     }
     
-    func addNote(with title: String, contents: String, emoji: String, img: UIImage? = nil, category: Category) {
+    func addNote(with title: String, contents: String, emoji: String? = nil, img: UIImage? = nil, category: Category? = nil) {
         guard let moc = CoreDataManager().getManagedObjectContext() else {return}
         guard contents != "Enter your note" else {return}
         

@@ -19,6 +19,8 @@ class ViewNoteViewController: UIViewController, CategoryViewNote, CreateNoteDele
     
     func provImage(_ img: UIImage) {
         imageView.image = img
+        imageLabel.text = "Click to change image"
+        imageView.backgroundColor = .clear
     }
     
     var viewNoteViewModel : ViewNoteViewModel?
@@ -29,6 +31,7 @@ class ViewNoteViewController: UIViewController, CategoryViewNote, CreateNoteDele
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var emojiLabel: UILabel!
+    @IBOutlet weak var imageLabel: UILabel!
     
     @IBAction func chooseEmoji(_ sender: UIButton) {
         performSegue(withIdentifier: "chooseEmoji", sender: sender)
@@ -49,7 +52,6 @@ class ViewNoteViewController: UIViewController, CategoryViewNote, CreateNoteDele
         colourLabel.backgroundColor = (category.color as? UIColor)
         let textColor = (category.color as? UIColor)!.isDarkColor ? UIColor.white : UIColor.black
         colourLabel.textColor = textColor
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -74,17 +76,15 @@ class ViewNoteViewController: UIViewController, CategoryViewNote, CreateNoteDele
         }
     }
     
-
-    
     func prepView() {
         if let note = note {
             if let img = note.picture?.picture {
                 imageView.image = UIImage(data: img)
-            } else {
-                imageView.isHidden = true
+                imageLabel.text = "Click to change image"
+                imageView.backgroundColor = .clear
             }
-            titleLabel.text = note.title!
-            emojiLabel.text = note.emoji!
+            titleLabel.text = note.title ?? "No title"
+            emojiLabel.text = note.emoji ?? "No emoji"
             contentLabel.text = note.contents
             
             if let noteColor = note.category?.color as? UIColor {

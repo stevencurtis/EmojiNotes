@@ -26,8 +26,11 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate, ChosenCate
     func chosenEmoji(_ emoji: String) {
         self.emoji = emoji
         emojiLabel.text = emoji
+        chooseEmojiButton.setTitle("Change Emoji", for: .normal)
+        
     }
     
+    @IBOutlet weak var chooseEmojiButton: UIButton!
     func chosenCategory(_ category: Category) {
         self.category = category
     }
@@ -42,7 +45,7 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate, ChosenCate
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var emojiLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
-    
+    @IBOutlet weak var imageLabel: UILabel!
     var textViewClearedOnInitialEdit = false
     var chosenText: String?
     var categoryName: String?
@@ -82,14 +85,20 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate, ChosenCate
     }
     
     override func willMove(toParent parent: UIViewController?) {
-        if let emoji = emoji, let category = category {
-            createNoteViewModel?.addNote(with: inputTextField.text ?? "untitled", contents: contentTextView.text, emoji: emoji, img: image, category: category)
-        }
-        
+        createNoteViewModel?.addNote(with: inputTextField.text ?? "untitled", contents: contentTextView.text, emoji: emoji, img: image, category: category)
+    }
+    
+    @objc func addImageView(_ sender:AnyObject){
+        performSegue(withIdentifier: "selectImg", sender: sender)
+
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(addImageView(_:)))
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(tapGestureRecognizer)
                 
         createNoteViewModel = CreateNoteViewModel()
         
@@ -138,6 +147,7 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate, ChosenCate
     func provImage(_ img: UIImage) {
         image = img
         imageView.image = img
+        imageLabel.text = "Click to change image"
     }
     
     @IBAction func attachImg(_ sender: UIButton) {
