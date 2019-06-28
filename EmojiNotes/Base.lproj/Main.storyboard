@@ -305,11 +305,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="9Aw-Py-Saq" firstAttribute="leading" secondItem="r5u-z4-Tfg" secondAttribute="leading" id="1a3-6E-H5g"/>
                             <constraint firstItem="Sjc-iy-3aS" firstAttribute="bottom" secondItem="9Aw-Py-Saq" secondAttribute="bottom" id="AuF-GV-BjN"/>
-                            <constraint firstItem="9Aw-Py-Saq" firstAttribute="top" secondItem="r5u-z4-Tfg" secondAttribute="top" id="Tpp-U5-mXl"/>
-                            <constraint firstAttribute="trailing" secondItem="9Aw-Py-Saq" secondAttribute="trailing" id="XfI-n2-Csw"/>
+                            <constraint firstItem="9Aw-Py-Saq" firstAttribute="leading" secondItem="Sjc-iy-3aS" secondAttribute="leading" id="SSP-ja-2dU"/>
+                            <constraint firstItem="Sjc-iy-3aS" firstAttribute="trailing" secondItem="9Aw-Py-Saq" secondAttribute="trailing" id="Xcn-4j-eWE"/>
                             <constraint firstItem="zqX-uO-Kaw" firstAttribute="height" secondItem="Sjc-iy-3aS" secondAttribute="height" priority="250" id="XwZ-sb-3t6"/>
+                            <constraint firstItem="Sjc-iy-3aS" firstAttribute="top" secondItem="9Aw-Py-Saq" secondAttribute="top" constant="88" id="Y9t-Bf-c2k"/>
                             <constraint firstItem="bXj-ty-tI9" firstAttribute="width" secondItem="r5u-z4-Tfg" secondAttribute="width" id="ogB-XT-AA6"/>
                             <constraint firstItem="zqX-uO-Kaw" firstAttribute="width" secondItem="Sjc-iy-3aS" secondAttribute="width" priority="250" id="pLa-f9-g55"/>
                         </constraints>
