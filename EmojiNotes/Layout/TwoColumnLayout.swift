@@ -36,6 +36,8 @@ class TwoColumnLayout: UICollectionViewLayout {
   
   override func prepare() {
     guard let collectionView = collectionView else { return }
+    // required to remove all of the cache if we delete a cell from the UICollectionView
+    cache.removeAll()
 
     // Pre-Calcuate the X Offset for every column, add an array to increment the max Y Offset for each column
     let columnWidth = contentWidth / CGFloat(numberOfColumns)

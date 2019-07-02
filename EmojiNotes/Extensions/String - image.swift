@@ -9,7 +9,7 @@
 import UIKit
 
 extension String {
-    
+    // for use in drawing the emoji as an image
     func image() -> UIImage? {
         let size = CGSize(width: 100, height: 100)
         UIGraphicsBeginImageContextWithOptions(size, false, 0);

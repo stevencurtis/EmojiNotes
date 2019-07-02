@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 protocol CreateNoteDelegate {
     func provImage(_ img: UIImage)
@@ -21,15 +22,7 @@ protocol ChosenEmojiDelegate {
 }
 
 class CreateNoteViewController: UIViewController, CreateNoteDelegate, ChosenCategoryDelegate, UITextViewDelegate, ChosenEmojiDelegate {
-    
-    // ------------ delegates ------------ //
-    func chosenEmoji(_ emoji: String) {
-        self.emoji = emoji
-        emojiLabel.text = emoji
-        chooseEmojiButton.setTitle("Change Emoji", for: .normal)
-        
-    }
-    
+
     @IBOutlet weak var chooseEmojiButton: UIButton!
     func chosenCategory(_ category: Category) {
         self.category = category
@@ -39,6 +32,16 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate, ChosenCate
     var category : Category?
     var createNoteViewModel : CreateNoteViewModel?
     var image : UIImage?
+    var coreDataManager: CoreDataManager!
+    var textViewClearedOnInitialEdit = false
+    var chosenText: String?
+    var categoryName: String?
+    var categoryColour: UIColor?
+    
+    lazy var context : NSManagedObjectContext = {
+        coreDataManager.getMainManagedObjectContext()
+        }()!
+    
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var inputTextField: UITextField!
@@ -46,14 +49,19 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate, ChosenCate
     @IBOutlet weak var emojiLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageLabel: UILabel!
-    var textViewClearedOnInitialEdit = false
-    var chosenText: String?
-    var categoryName: String?
-    var categoryColour: UIColor?
+
     
     @IBAction func textViewDone(_ sender: UITextField) {
         chosenText = inputTextField.text
         sender.resignFirstResponder()
+    }
+    
+    @objc func addImageView(_ sender:AnyObject){
+        performSegue(withIdentifier: "selectImg", sender: sender)
+    }
+    
+    @IBAction func chooseEmoji(_ sender: UIButton) {
+        performSegue(withIdentifier: "emojiChooser", sender: sender)
     }
     
     @IBAction func addCategory(_ sender: UIButton) {
@@ -79,20 +87,11 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate, ChosenCate
             self.present(sheet, animated: true, completion: nil)
         }
     }
-    
-    @IBAction func addNote(_ sender: UIButton) {
-//        createNoteViewModel?.addNote(with: chosenText ?? "untitled", contents: contentTextView.text, emoji: emoji!, img: image, colour: categoryColour, catagoryName: categoryName)
-    }
-    
+
     override func willMove(toParent parent: UIViewController?) {
         if parent == nil {
             createNoteViewModel?.addNote(with: inputTextField.text, contents: contentTextView.text, emoji: emoji, img: image, category: category)
         }
-    }
-    
-    @objc func addImageView(_ sender:AnyObject){
-        performSegue(withIdentifier: "selectImg", sender: sender)
-
     }
     
     override func viewDidLoad() {
@@ -102,7 +101,7 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate, ChosenCate
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(tapGestureRecognizer)
                 
-        createNoteViewModel = CreateNoteViewModel()
+        createNoteViewModel = CreateNoteViewModel(coreDataManager)
         
         createNoteViewModel?.modelDidChange = {
             self.navigationController?.popViewController(animated: true)
@@ -127,10 +126,6 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate, ChosenCate
             self.textViewClearedOnInitialEdit = true
         }
     }
-    
-    @IBAction func chooseEmoji(_ sender: UIButton) {
-        performSegue(withIdentifier: "emojiChooser", sender: sender)
-    }
 
     @objc func adjustForKeyboard(notification: Notification) {
         guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
@@ -144,6 +139,13 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate, ChosenCate
             scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height - view.safeAreaInsets.bottom, right: 0)
         }
         scrollView.scrollIndicatorInsets = scrollView.contentInset
+    }
+    
+    // ------------ delegates ------------ //
+    func chosenEmoji(_ emoji: String) {
+        self.emoji = emoji
+        emojiLabel.text = emoji
+        chooseEmojiButton.setTitle("Change Emoji", for: .normal)
     }
     
     func provImage(_ img: UIImage) {
@@ -164,6 +166,8 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate, ChosenCate
         } else {
             if segue.identifier == "addCat" {
                 if let destination = segue.destination as? AddCategoryViewController {
+                    destination.coreDataManager = coreDataManager
+                    destination.context = context
                     destination.delegate = self
                     
                 }
@@ -176,9 +180,6 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate, ChosenCate
                 }
             }
         }
-    }
-    
-    @IBAction func attachImage(_ sender: UIButton) {
     }
     
 }

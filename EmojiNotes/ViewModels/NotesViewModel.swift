@@ -14,15 +14,18 @@ public class NotesViewModel: NSObject {
 
     public var modelDidChange: (()->Void)?
     
+    var coreDataManager: CoreDataManager!
+    
     lazy var fetchedResultsController: NSFetchedResultsController<Note> = {
         
         let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
         
         let fetchSort = NSSortDescriptor(key: #keyPath(Note.createdAt), ascending: true)
+
         fetchRequest.sortDescriptors = [fetchSort]
         let fetchedResultsController = NSFetchedResultsController(
             fetchRequest: fetchRequest,
-            managedObjectContext: CoreDataManager().getManagedObjectContext()!,
+            managedObjectContext: coreDataManager.getMainManagedObjectContext()!,
             sectionNameKeyPath: nil,
             cacheName: nil)
         return fetchedResultsController
@@ -36,11 +39,20 @@ public class NotesViewModel: NSObject {
             print("\(error), \(error.localizedDescription)")
         }
     }
-
-    override init() {
+    
+    init(_ coreDataManager : CoreDataManager) {
         super.init()
+        self.coreDataManager = coreDataManager
         fetchedResultsController.delegate = self
     }
+    
+    func deleteNote(_ nodeID: NSManagedObjectID) {
+        guard let moc = coreDataManager.getMainManagedObjectContext() else {return}
+        moc.delete(moc.object(with: nodeID))
+        // save the deletion. Ideally you'd give the user an "are you sure" dialogue for an important note!
+        coreDataManager.saveContext()
+    }
+    
 }
 
 extension NotesViewModel: NSFetchedResultsControllerDelegate {

@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import CoreData
 
 class CategoriesTableViewController: UITableViewController {
     private static let cellReuseId = "CatCell"
-    var selectedCategory : String?
     var delegate : CategoryViewNote?
     var categoriesTableViewModel : CategoriesTableViewModel?
+    var coreDataManager: CoreDataManager!
+    var context: NSManagedObjectContext!
+    var noteObjectID: NSManagedObjectID!
     
     override func viewWillAppear(_ animated: Bool) {
         self.tableView.reloadData()
@@ -21,15 +24,20 @@ class CategoriesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: CategoriesTableViewController.cellReuseId)
-        categoriesTableViewModel = CategoriesTableViewModel()
+        categoriesTableViewModel = CategoriesTableViewModel(coreDataManager, context)
         categoriesTableViewModel?.fetchCategories()
+        categoriesTableViewModel?.modelDidChange = {
+            DispatchQueue.main.async { [weak self] in
+                self?.tableView.reloadData()
+            }
+        }
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add Category", style: .plain, target: self, action: #selector(addTapped))
+
     }
     
     @objc func addTapped() {
         // addCategory
         performSegue(withIdentifier: "addCategory", sender: nil)
-
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -37,8 +45,9 @@ class CategoriesTableViewController: UITableViewController {
             if let destination = segue.destination as? AddCategoryViewController {
                 if let cat = sender as? Category {
                     destination.currentCategory = cat
+                    destination.context = context
+                    destination.coreDataManager = coreDataManager
                 }
-                
             }
         }
     }
@@ -80,11 +89,20 @@ class CategoriesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // deselect (grey) the current cell
-        tableView.deselectRow(at: indexPath, animated: true)
+      //  tableView.deselectRow(at: indexPath, animated: true)
         if let category = categoriesTableViewModel?.fetchedResultsController.object(at: indexPath) {
-            // return via delegate to the previous view
-            delegate?.updateCategories(category: category)
+            // return & inform delegate in the view note view
+            
+            delegate?.updateCategories(category: category, name: category.name ?? "NoName")
+
+            categoriesTableViewModel!.updateCategory(noteObjectID: noteObjectID!, colourObjectID: category.objectID)
+
+            self.navigationController?.popViewController(animated: true)
+        
         }
     }
+    
+    
+
 
 }

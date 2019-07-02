@@ -11,10 +11,8 @@
 		CA3D4C7822C3621000DF41B2 /* EmojiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3D4C7622C3621000DF41B2 /* EmojiCollectionViewCell.swift */; };
 		CA3D4C7922C3621000DF41B2 /* EmojiCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA3D4C7722C3621000DF41B2 /* EmojiCollectionViewCell.xib */; };
 		CA3D4C7B22C3645200DF41B2 /* String - image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3D4C7A22C3645200DF41B2 /* String - image.swift */; };
-		CA7D4BCA22C2037B0024D348 /* SimpleNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7D4BC922C2037B0024D348 /* SimpleNote.swift */; };
 		CA7D4BCD22C238EC0024D348 /* UITextView - doneAccessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7D4BCC22C238EC0024D348 /* UITextView - doneAccessory.swift */; };
 		CAA6356522C08F65006C8C1F /* TwoColumnLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA6356422C08F65006C8C1F /* TwoColumnLayout.swift */; };
-		CAA6356822C099A5006C8C1F /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA6356722C099A5006C8C1F /* NotificationName.swift */; };
 		CAA6356B22C0B9A9006C8C1F /* ViewNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA6356A22C0B9A9006C8C1F /* ViewNoteViewController.swift */; };
 		CAA6356D22C0B9E7006C8C1F /* ViewNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA6356C22C0B9E7006C8C1F /* ViewNoteViewModel.swift */; };
 		CAA6356F22C0C0AD006C8C1F /* CategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA6356E22C0C0AD006C8C1F /* CategoriesTableViewController.swift */; };
@@ -62,10 +60,8 @@
 		CA3D4C7622C3621000DF41B2 /* EmojiCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCollectionViewCell.swift; sourceTree = "<group>"; };
 		CA3D4C7722C3621000DF41B2 /* EmojiCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmojiCollectionViewCell.xib; sourceTree = "<group>"; };
 		CA3D4C7A22C3645200DF41B2 /* String - image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String - image.swift"; sourceTree = "<group>"; };
-		CA7D4BC922C2037B0024D348 /* SimpleNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleNote.swift; sourceTree = "<group>"; };
 		CA7D4BCC22C238EC0024D348 /* UITextView - doneAccessory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView - doneAccessory.swift"; sourceTree = "<group>"; };
 		CAA6356422C08F65006C8C1F /* TwoColumnLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoColumnLayout.swift; sourceTree = "<group>"; };
-		CAA6356722C099A5006C8C1F /* NotificationName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		CAA6356A22C0B9A9006C8C1F /* ViewNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewNoteViewController.swift; sourceTree = "<group>"; };
 		CAA6356C22C0B9E7006C8C1F /* ViewNoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewNoteViewModel.swift; sourceTree = "<group>"; };
 		CAA6356E22C0C0AD006C8C1F /* CategoriesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTableViewController.swift; sourceTree = "<group>"; };
@@ -122,14 +118,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CA7D4BCB22C203940024D348 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				CA7D4BC922C2037B0024D348 /* SimpleNote.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		CAA6356622C093CF006C8C1F /* Layout */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,7 +129,6 @@
 		CAA6356922C099A9006C8C1F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				CAA6356722C099A5006C8C1F /* NotificationName.swift */,
 				CA3D4C7A22C3645200DF41B2 /* String - image.swift */,
 				CAA6357222C0DB41006C8C1F /* UIColor - isDarkColor.swift */,
 				CAA6357422C0DBF8006C8C1F /* UIColor - name.swift */,
@@ -176,7 +163,6 @@
 				CAF262DE22BCB69800AA164C /* AppDelegate.swift */,
 				CAF2631B22BCCE6000AA164C /* ViewControllers */,
 				CAF2631A22BCCE5500AA164C /* ViewModels */,
-				CA7D4BCB22C203940024D348 /* Models */,
 				CAA6356922C099A9006C8C1F /* Extensions */,
 				CAF262E222BCB69800AA164C /* Main.storyboard */,
 				CAA6356622C093CF006C8C1F /* Layout */,
@@ -380,8 +366,6 @@
 			files = (
 				CAA6357522C0DBF8006C8C1F /* UIColor - name.swift in Sources */,
 				CAF2632122BCE14F00AA164C /* CreateNoteViewModel.swift in Sources */,
-				CAA6356822C099A5006C8C1F /* NotificationName.swift in Sources */,
-				CA7D4BCA22C2037B0024D348 /* SimpleNote.swift in Sources */,
 				CAF2631222BCBA4300AA164C /* Constants.swift in Sources */,
 				CA3D4C7822C3621000DF41B2 /* EmojiCollectionViewCell.swift in Sources */,
 				CAA6357122C0C703006C8C1F /* CategoriesTableViewModel.swift in Sources */,

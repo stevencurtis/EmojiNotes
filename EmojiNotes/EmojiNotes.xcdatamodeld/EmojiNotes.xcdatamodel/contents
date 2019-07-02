@@ -3,7 +3,7 @@
     <entity name="Category" representedClassName="Category" syncable="YES" codeGenerationType="class">
         <attribute name="color" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="note" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Note" inverseName="category" inverseEntity="Note" syncable="YES"/>
+        <relationship name="note" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Note" inverseName="category" inverseEntity="Note" syncable="YES"/>
     </entity>
     <entity name="Note" representedClassName="Note" syncable="YES" codeGenerationType="class">
         <attribute name="contents" optional="YES" attributeType="String" syncable="YES"/>

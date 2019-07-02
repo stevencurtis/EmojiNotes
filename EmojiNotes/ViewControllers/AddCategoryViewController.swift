@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class AddCategoryViewController: UIViewController {
     
@@ -16,6 +17,9 @@ class AddCategoryViewController: UIViewController {
     var newColor: UIColor?
     
     var delegate: ChosenCategoryDelegate?
+    var coreDataManager: CoreDataManager!
+    
+    var context: NSManagedObjectContext!
     
     @IBOutlet weak var addCategoryButton: UIButton!
     @IBOutlet weak var existingColour: UILabel!
@@ -24,7 +28,8 @@ class AddCategoryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        categoriesTableViewModel = CategoriesTableViewModel()
+        // Context??
+        categoriesTableViewModel = CategoriesTableViewModel(coreDataManager, context)
         if currentCategory != nil {
             self.existingColour.text = (currentCategory?.color as? UIColor)?.name
             self.existingColourBlock.backgroundColor = currentCategory?.color as? UIColor
@@ -48,7 +53,6 @@ class AddCategoryViewController: UIViewController {
                 self.newColor = color
                 if let cat = self.newCategory, let col = self.newColor {
                     self.updateCategory(cat, col)
-//                    delegate?.chosenCategory(<#T##category: Category##Category#>)
                 }
             }
             )

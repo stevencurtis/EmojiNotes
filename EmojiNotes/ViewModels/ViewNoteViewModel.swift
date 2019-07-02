@@ -10,11 +10,17 @@ import Foundation
 import UIKit
 import CoreData
 
-
 public class ViewNoteViewModel {
-    func update(note: Note, with category: Category? = nil, emoji: String? = nil, title: String? = nil, image: UIImage? = nil, content: String? = nil) {
+    
+    var coreDataManager: CoreDataManager!
+    var context: NSManagedObjectContext!
+    
+    func update(noteID: NSManagedObjectID, with category: Category? = nil, emoji: String? = nil, title: String? = nil, image: UIImage? = nil, content: String? = nil) {
+        
+        let note = context.object(with: noteID)
         if let category = category {
-            note.setValue(category, forKey: "category")
+            let cat = context.object(with: category.objectID) as! Category
+            note.setValue(cat, forKey: "category")
         }
         
         if let emoji = emoji {
@@ -26,23 +32,25 @@ public class ViewNoteViewModel {
         }
         
         if let image = image {
-            guard let moc = CoreDataManager().getManagedObjectContext() else {return}
-            if let prevPic = note.picture {
-                moc.delete(prevPic)
-            }
-            
-            let notePicture = NotePicture(context: moc)
+            if let prevPic = (note as! Note).picture {
+                context.delete(prevPic)
+            }            
+            let notePicture = NotePicture(context: context)
             notePicture.picture = image.pngData()
-            notePicture.note = note            
-            note.setValue(title, forKey: "title")
+            notePicture.note = (note as! Note)
         }
         
         if let content = content {
             note.setValue(content, forKey: "contents")
         }
         
-        CoreDataManager().saveContext()
+        coreDataManager.saveContext(context)
+        
     }
-
+    
+    init(_ coreDataManager : CoreDataManager, _ context: NSManagedObjectContext) {
+        self.coreDataManager = coreDataManager
+        self.context = context
+    }
     
 }

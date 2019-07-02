@@ -35,21 +35,9 @@ class AttachPhotoViewController: UIViewController {
 // MARK: - UIImagePickerControllerDelegate
 extension AttachPhotoViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        
-//        guard let note = note,
-//            let context = note.managedObjectContext else {
-//                return
-//        }
-//
-//        let attachment = Attachment(context: context)
-//        attachment.dateCreated = Date()
-//        attachment.image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-//        attachment.note = note
-        
         if let img = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             noteDelegate?.provImage(img)
         }
-        
         _ = navigationController?.popViewController(animated: true)
     }
 }

@@ -13,9 +13,7 @@ class ChooseEmojiViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     var emojiList: [String] = []
-
     let emojiRange = (0x1F601...0x1F64F)
-
     var delegate : ChosenEmojiDelegate? = nil
 
     override func viewDidLoad() {
@@ -28,15 +26,12 @@ class ChooseEmojiViewController: UIViewController {
                 }
             }
             
-            emojiList = (array)
-        
+        emojiList = (array)
         collectionView.dataSource = self
         collectionView.delegate = self
         
         let nib = UINib(nibName: "EmojiCollectionViewCell", bundle: nil);
         collectionView.register(nib, forCellWithReuseIdentifier: "EmojiCollectionViewCell")
-
-
     }
 }
 

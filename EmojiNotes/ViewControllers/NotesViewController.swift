@@ -11,26 +11,31 @@ import CoreData
 
 class NotesViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     
+    @IBOutlet weak var noNotesSV: UIStackView!
+    @IBOutlet weak var notesCollectionView: UICollectionView!
+
     var notesViewModel : NotesViewModel?
     
-    @IBOutlet weak var noNotesSV: UIStackView!
+    // a boolean to store if the cells are shaking - because if they are we can't traverse to the view screen
+    var shaking = false
+
+    let coreDataManager = CoreDataManager()
     
-    
-    @IBOutlet weak var notesCollectionView: UICollectionView!
+    @IBAction func createNote(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "createNote", sender: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        notesViewModel = NotesViewModel()
-        
+        notesViewModel = NotesViewModel(coreDataManager)
         notesViewModel?.modelDidChange = {
             self.notesCollectionView.reloadData()
         }
         
+        // view model fetches the notes from the NSFetchedResultsControllerDelegate
         notesViewModel?.fetchNotes()
         
         notesCollectionView.contentInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-        
         notesCollectionView.dataSource = self
         notesCollectionView.delegate = self
         
@@ -41,9 +46,53 @@ class NotesViewController: UIViewController, UICollectionViewDelegateFlowLayout 
         
         let nib = UINib(nibName: "NotesCollectionViewCell", bundle: nil);
         notesCollectionView.register(nib, forCellWithReuseIdentifier: "NotesCollectionViewCell")
+        
+        // Long press recognizer for the notes
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressed))
+        longPressGesture.minimumPressDuration = 1.0 // 1 second press
+        longPressGesture.allowableMovement = 15 // 15 points
+        longPressGesture.delegate = self
+        self.notesCollectionView.addGestureRecognizer(longPressGesture)    }
+    
+    @objc func longPressed(sender: UILongPressGestureRecognizer)
+    {
+        
+        if sender.state == UIGestureRecognizer.State.ended {
+            return
+        }
+        else if sender.state == UIGestureRecognizer.State.began
+        {
+            let p = sender.location(in: self.notesCollectionView)
+            let indexPath = self.notesCollectionView.indexPathForItem(at: p)
+            
+            if let index = indexPath {
+                if let note = notesViewModel?.fetchedResultsController.object(at: index) {
+                    if shaking {
+                        notesViewModel?.deleteNote(note.objectID)
+                    }
+                }
+            } else {
+                // not on a cell
+                for cell in notesCollectionView!.visibleCells {
+                    if let cell = cell as? NotesCollectionViewCell {
+                        cell.stopShaking()
+                    }
+                }
+                shaking = false
+                return
+            }
+
+            for cell in notesCollectionView!.visibleCells {
+                if let cell = cell as? NotesCollectionViewCell {
+                    cell.shake()
+                }
+            }
+            shaking = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        // reloaded as the data may have changed on the view note screen
         self.notesCollectionView.reloadData()
     }
     
@@ -56,8 +105,17 @@ class NotesViewController: UIViewController, UICollectionViewDelegateFlowLayout 
         if segue.identifier == "showNote" {
             if let destination = segue.destination as? ViewNoteViewController {
                 if let note = notesViewModel?.fetchedResultsController.object(at: (sender as! IndexPath) ) {
-                    destination.note = note
+                    // here to use a childContext. This child context is wholly for amending objects
+                    destination.coreDataManager = coreDataManager
+                    
+                    let myNoteEntity = coreDataManager.childManagedObjectContext.object(with: note.objectID) as! Note
+                    destination.context = coreDataManager.childManagedObjectContext
+                    destination.noteObjectID = myNoteEntity.objectID
                 }
+            }
+        } else if segue.identifier == "createNote" {
+            if let destination = segue.destination as? CreateNoteViewController {
+                destination.coreDataManager = coreDataManager
             }
         }
     }
@@ -89,15 +147,14 @@ extension NotesViewController: UICollectionViewDataSource {
         }
         return cell
     }
-
 }
 
 extension NotesViewController: UICollectionViewDelegate {
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "showNote", sender: indexPath)
+        if !shaking {
+            performSegue(withIdentifier: "showNote", sender: indexPath)
+        }
     }
-    
 }
 
 //MARK: - TwoColumnLayoutDelegate
@@ -111,7 +168,6 @@ extension NotesViewController : TwoColumnLayoutDelegate {
         }
         return 0
     }
-    
 }
 
-
+extension NotesViewController: UIGestureRecognizerDelegate {}
