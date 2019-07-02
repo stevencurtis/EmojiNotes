@@ -19,21 +19,11 @@ class CoreDataManager: CoreDataManagerProtocol {
     
     // MARK: Properties
      private let modelName: String
-    
-//    private var managedObjectContext: NSManagedObjectContext! = nil
-//    lazy var managedObjectContext: NSManagedObjectContext = {
-//        return self.storeContainer.viewContext
-//    }()-
 
     lazy var managedObjectContext: NSManagedObjectContext = {
         // The alternative to this is to set up our own store
         return (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     }()
-    
-//    private lazy var childManagedObjectContext: NSManagedObjectContext = {
-//        return NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-//    }()
-    
     
     private(set) lazy var childManagedObjectContext: NSManagedObjectContext = {
         // Initialize Managed Object Context
@@ -44,14 +34,6 @@ class CoreDataManager: CoreDataManagerProtocol {
         
         return myChildManagedObjectContext
     }()
-    
-//    var childManagedObjectContext: NSManagedObjectContext?
-//
-//    func setChildManagedObjectContext(_ tmpContext: NSManagedObjectContext, _ parent: NSManagedObjectContext) {
-//        let childContext = tmpContext
-//        childContext.parent = parent
-//        childManagedObjectContext = childContext
-//    }
     
     // NSPersistentContainer - hides implementation details of how persistent stores are configured
     lazy var storeContainer: NSPersistentContainer = {
@@ -75,24 +57,11 @@ class CoreDataManager: CoreDataManagerProtocol {
 
 
     init (mainObjectContext: NSManagedObjectContext, entity: NSEntityDescription) {
-//        self.managedObjectContext = mainObjectContext
-//        self.entity = entity
         self.modelName = "EmojiNotes"
     }
     
     required init() {
         self.modelName = "EmojiNotes" //Constants.entityName
-
-        guard let _ = UIApplication.shared.delegate as? AppDelegate else { return }
-        // This context is associated directly with the NSPersistentStoreCoordinator and is non-generational by default.
-        // This is the managed object context generated as part of the new core data App checkbox!
-        
-        // if not lazy
-//        managedObjectContext = appDelegate.persistentContainer.viewContext // the managed object context associated with the main queue
-//        managedObjectContext = self.storeContainer.viewContext // my own manged object context
-
-        
-//        entity = NSEntityDescription.entity(forEntityName: Constants.entityName, in: managedObjectContext)!
     }
 
     func saveContext (_ context: NSManagedObjectContext) {
@@ -115,7 +84,7 @@ class CoreDataManager: CoreDataManagerProtocol {
     func saveContext () {
         
         if childManagedObjectContext.hasChanges {
-//            childManagedObjectContext.performAndWait {
+            childManagedObjectContext.performAndWait {
                 do {
                     
                     try childManagedObjectContext.save()
@@ -125,18 +94,20 @@ class CoreDataManager: CoreDataManagerProtocol {
                 } catch let error as NSError {
                     print("Unresolved error \(error), \(error.userInfo)")
                 }
-//            }
+            }
         }
         
         if managedObjectContext.hasChanges {
+            managedObjectContext.perform {
             do {
                 
-                try managedObjectContext.save()
+                try self.managedObjectContext.save()
                 // inform listeners that we have updated the model
                 // NotificationCenter.default.post(name: Notification.Name.dataModelDidUpdateNotification, object: self, userInfo: nil)
                 
             } catch let error as NSError {
                 print("Unresolved error \(error), \(error.userInfo)")
+            }
             }
         }
 
