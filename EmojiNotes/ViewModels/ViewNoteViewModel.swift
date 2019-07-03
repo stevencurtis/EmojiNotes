@@ -12,7 +12,7 @@ import CoreData
 
 public class ViewNoteViewModel {
     
-    var coreDataManager: CoreDataManager!
+    var coreDataManager: CoreDataManagerProtocol!
     var context: NSManagedObjectContext!
     
     func update(noteID: NSManagedObjectID, with category: Category? = nil, emoji: String? = nil, title: String? = nil, image: UIImage? = nil, content: String? = nil) {

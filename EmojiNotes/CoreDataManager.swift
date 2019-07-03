@@ -10,20 +10,25 @@ import UIKit
 import CoreData
 
 public protocol CoreDataManagerProtocol {
-//    func getTasks() -> [NSManagedObject]
-//    func save(task: String)
-//    init()
+    func saveContext ()
+    init()
+    func getMainManagedObjectContext() -> NSManagedObjectContext?
+    func getChildManagedObjectContext() -> NSManagedObjectContext?
+    func saveContext (_ context: NSManagedObjectContext)
 }
 
 class CoreDataManager: CoreDataManagerProtocol {
     
     // MARK: Properties
-     private let modelName: String
-
-    lazy var managedObjectContext: NSManagedObjectContext = {
-        // The alternative to this is to set up our own store
-        return (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    }()
+    private let modelName: String
+//    private var entity: NSEntityDescription! = nil
+    
+//    lazy var managedObjectContext: NSManagedObjectContext = {
+//        // The alternative to this is to set up our own store
+//        return (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//    }()
+    
+    private var managedObjectContext: NSManagedObjectContext! = nil
     
     private(set) lazy var childManagedObjectContext: NSManagedObjectContext = {
         // Initialize Managed Object Context
@@ -37,7 +42,7 @@ class CoreDataManager: CoreDataManagerProtocol {
     
     // NSPersistentContainer - hides implementation details of how persistent stores are configured
     lazy var storeContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "EmojiNotes")        
+        let container = NSPersistentContainer(name: Constants.modelName)
         container.loadPersistentStores { (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
@@ -55,17 +60,20 @@ class CoreDataManager: CoreDataManagerProtocol {
         return childManagedObjectContext
     }
 
-
     init (mainObjectContext: NSManagedObjectContext, entity: NSEntityDescription) {
-        self.modelName = "EmojiNotes"
+        self.modelName = Constants.modelName // "EmojiNotes"
+        managedObjectContext = mainObjectContext
+//        self.entity = NSEntityDescription.entity(forEntityName: Constants.entityName, in: managedObjectContext)!
+//        self.entity = entity
     }
     
     required init() {
-        self.modelName = "EmojiNotes" //Constants.entityName
+        managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        self.modelName = Constants.modelName
     }
 
     func saveContext (_ context: NSManagedObjectContext) {
-        // performblock and execute on correct threa
+        // performblock and execute on correct thread
         context.perform {
             if context.hasChanges {
                 do {
@@ -96,7 +104,6 @@ class CoreDataManager: CoreDataManagerProtocol {
                 }
             }
         }
-        
         if managedObjectContext.hasChanges {
             managedObjectContext.perform {
             do {

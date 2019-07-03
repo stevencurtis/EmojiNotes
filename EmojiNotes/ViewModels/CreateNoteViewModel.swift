@@ -18,7 +18,7 @@ public class CreateNoteViewModel {
     // closure so if the model has changed, we know to pop the vc
     public var modelDidChange: (()->Void)?
     
-    var coreDataManager: CoreDataManager!
+    var coreDataManager: CoreDataManagerProtocol!
 
     @objc func notificationReceived (withNotification notification: NSNotification) {
         DispatchQueue.main.async {
@@ -26,24 +26,46 @@ public class CreateNoteViewModel {
         }
     }
     
-    func addNote(with title: String? = nil, contents: String, emoji: String? = nil, img: UIImage? = nil, category: Category? = nil) {
+    func addNote(with title: String? = nil, contents: String, emoji: String? = nil, img: UIImage? = nil, categoryName: String? = nil, categoryColour: UIColor? = nil, noteEntity: NSEntityDescription? = nil, pictureEntity: NSEntityDescription? = nil, categoryEntity: NSEntityDescription? = nil) {
         guard let moc = coreDataManager.getMainManagedObjectContext() else {return}
         guard contents != "Enter your note" else {return}
-        
-        let note = Note(context: moc)
+        let note: Note
+
+        if let noteEntity = noteEntity {
+            note = Note(entity: noteEntity, insertInto: moc)
+        } else {
+            note = Note(context: moc)
+        }
         note.contents = ( (contents == "Enter your note") ? "No contents" : contents )
         note.title = ( (title! == "") ? "Titleless note" : title)
         note.createdAt = Date()
-        note.contents = contents
         note.emoji = emoji
         note.updatedAt = Date()
         
-        let notePicture = NotePicture(context: moc)
+        let notePicture : NotePicture // = NotePicture(context: moc)
+        
+        if let pictureEntity = pictureEntity {
+            notePicture = NotePicture(entity: pictureEntity, insertInto: moc)
+        } else {
+            notePicture = NotePicture(context: moc)
+        }
+        
         notePicture.picture = img?.pngData()
         notePicture.note = note
-        note.category = category
         
-        coreDataManager.saveContext()
+        
+        let category : Category
+        
+        if let categoryEntity = categoryEntity {
+            category = Category(entity: categoryEntity, insertInto: moc)
+        } else {
+            category = Category(context: moc)
+        }
+        
+        category.color = categoryColour
+        category.name = categoryName
+        
+        note.category = category
     }
     
     func getCategories(closure : @escaping ((_ result: [Category])->Void) ) {
@@ -64,7 +86,7 @@ public class CreateNoteViewModel {
         }
     }
     
-    init(_ coreDataManager : CoreDataManager) {
+    init(_ coreDataManager : CoreDataManagerProtocol) {
         self.coreDataManager = coreDataManager
     }
 

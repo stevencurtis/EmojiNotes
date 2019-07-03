@@ -14,7 +14,7 @@ public class CategoriesTableViewModel: NSObject {
     
     public var modelDidChange: (()->Void)?
     
-    var coreDataManager: CoreDataManager!
+    var coreDataManager: CoreDataManagerProtocol!
 
     var context: NSManagedObjectContext!
 
@@ -40,7 +40,7 @@ public class CategoriesTableViewModel: NSObject {
         }
     }
     
-    init(_ coreDataManager : CoreDataManager, _ context: NSManagedObjectContext? = nil) {
+    init(_ coreDataManager : CoreDataManagerProtocol, _ context: NSManagedObjectContext? = nil) {
         super.init()
         self.coreDataManager = coreDataManager
         if let context = context {

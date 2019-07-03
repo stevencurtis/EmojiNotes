@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 struct Constants {
+    static let modelName = "EmojiNotes"
+    
     static let entityName = "Note"
     static let entityNameAttribute = "task"
     static let entityCompletedattribute = "completed"

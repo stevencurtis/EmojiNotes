@@ -11,6 +11,11 @@
 		CA3D4C7822C3621000DF41B2 /* EmojiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3D4C7622C3621000DF41B2 /* EmojiCollectionViewCell.swift */; };
 		CA3D4C7922C3621000DF41B2 /* EmojiCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA3D4C7722C3621000DF41B2 /* EmojiCollectionViewCell.xib */; };
 		CA3D4C7B22C3645200DF41B2 /* String - image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3D4C7A22C3645200DF41B2 /* String - image.swift */; };
+		CA6C68D222CB8BCA00C31C7B /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6C68D122CB8BC900C31C7B /* CoreDataTests.swift */; };
+		CA6F142C22CC280F00964D55 /* UIColorisDarkColorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6F142B22CC280F00964D55 /* UIColorisDarkColorTest.swift */; };
+		CA6F142E22CC2CF500964D55 /* UIColorNameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6F142D22CC2CF500964D55 /* UIColorNameTests.swift */; };
+		CA6F143122CC31B900964D55 /* CoreDataManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6F143022CC31B900964D55 /* CoreDataManagerMock.swift */; };
+		CA6F143422CC333000964D55 /* CreateNoteViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6F143322CC333000964D55 /* CreateNoteViewModelTests.swift */; };
 		CA7D4BCD22C238EC0024D348 /* UITextView - doneAccessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7D4BCC22C238EC0024D348 /* UITextView - doneAccessory.swift */; };
 		CAA6356522C08F65006C8C1F /* TwoColumnLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA6356422C08F65006C8C1F /* TwoColumnLayout.swift */; };
 		CAA6356B22C0B9A9006C8C1F /* ViewNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA6356A22C0B9A9006C8C1F /* ViewNoteViewController.swift */; };
@@ -26,7 +31,6 @@
 		CAF262E722BCB69800AA164C /* EmojiNotes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CAF262E522BCB69800AA164C /* EmojiNotes.xcdatamodeld */; };
 		CAF262E922BCB69C00AA164C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAF262E822BCB69C00AA164C /* Assets.xcassets */; };
 		CAF262EC22BCB69C00AA164C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAF262EA22BCB69C00AA164C /* LaunchScreen.storyboard */; };
-		CAF262F722BCB69C00AA164C /* EmojiNotesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF262F622BCB69C00AA164C /* EmojiNotesTests.swift */; };
 		CAF2630222BCB69C00AA164C /* EmojiNotesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2630122BCB69C00AA164C /* EmojiNotesUITests.swift */; };
 		CAF2631022BCBA1500AA164C /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2630F22BCBA1500AA164C /* CoreDataManager.swift */; };
 		CAF2631222BCBA4300AA164C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF2631122BCBA4300AA164C /* Constants.swift */; };
@@ -60,6 +64,11 @@
 		CA3D4C7622C3621000DF41B2 /* EmojiCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCollectionViewCell.swift; sourceTree = "<group>"; };
 		CA3D4C7722C3621000DF41B2 /* EmojiCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmojiCollectionViewCell.xib; sourceTree = "<group>"; };
 		CA3D4C7A22C3645200DF41B2 /* String - image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String - image.swift"; sourceTree = "<group>"; };
+		CA6C68D122CB8BC900C31C7B /* CoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
+		CA6F142B22CC280F00964D55 /* UIColorisDarkColorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorisDarkColorTest.swift; sourceTree = "<group>"; };
+		CA6F142D22CC2CF500964D55 /* UIColorNameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorNameTests.swift; sourceTree = "<group>"; };
+		CA6F143022CC31B900964D55 /* CoreDataManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerMock.swift; sourceTree = "<group>"; };
+		CA6F143322CC333000964D55 /* CreateNoteViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteViewModelTests.swift; sourceTree = "<group>"; };
 		CA7D4BCC22C238EC0024D348 /* UITextView - doneAccessory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView - doneAccessory.swift"; sourceTree = "<group>"; };
 		CAA6356422C08F65006C8C1F /* TwoColumnLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoColumnLayout.swift; sourceTree = "<group>"; };
 		CAA6356A22C0B9A9006C8C1F /* ViewNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewNoteViewController.swift; sourceTree = "<group>"; };
@@ -78,7 +87,6 @@
 		CAF262EB22BCB69C00AA164C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CAF262ED22BCB69C00AA164C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CAF262F222BCB69C00AA164C /* EmojiNotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmojiNotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CAF262F622BCB69C00AA164C /* EmojiNotesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiNotesTests.swift; sourceTree = "<group>"; };
 		CAF262F822BCB69C00AA164C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CAF262FD22BCB69C00AA164C /* EmojiNotesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmojiNotesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAF2630122BCB69C00AA164C /* EmojiNotesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiNotesUITests.swift; sourceTree = "<group>"; };
@@ -118,6 +126,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CA6F142F22CC2E9A00964D55 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CA6F142B22CC280F00964D55 /* UIColorisDarkColorTest.swift */,
+				CA6F142D22CC2CF500964D55 /* UIColorNameTests.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CA6F143222CC31E900964D55 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				CA6F143022CC31B900964D55 /* CoreDataManagerMock.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
 		CAA6356622C093CF006C8C1F /* Layout */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,7 +205,10 @@
 		CAF262F522BCB69C00AA164C /* EmojiNotesTests */ = {
 			isa = PBXGroup;
 			children = (
-				CAF262F622BCB69C00AA164C /* EmojiNotesTests.swift */,
+				CA6C68D122CB8BC900C31C7B /* CoreDataTests.swift */,
+				CA6F143322CC333000964D55 /* CreateNoteViewModelTests.swift */,
+				CA6F143222CC31E900964D55 /* Mock */,
+				CA6F142F22CC2E9A00964D55 /* Extensions */,
 				CAF262F822BCB69C00AA164C /* Info.plist */,
 			);
 			path = EmojiNotesTests;
@@ -393,7 +421,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAF262F722BCB69C00AA164C /* EmojiNotesTests.swift in Sources */,
+				CA6C68D222CB8BCA00C31C7B /* CoreDataTests.swift in Sources */,
+				CA6F143122CC31B900964D55 /* CoreDataManagerMock.swift in Sources */,
+				CA6F143422CC333000964D55 /* CreateNoteViewModelTests.swift in Sources */,
+				CA6F142E22CC2CF500964D55 /* UIColorNameTests.swift in Sources */,
+				CA6F142C22CC280F00964D55 /* UIColorisDarkColorTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -32,7 +32,7 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate, ChosenCate
     var category : Category?
     var createNoteViewModel : CreateNoteViewModel?
     var image : UIImage?
-    var coreDataManager: CoreDataManager!
+    var coreDataManager: CoreDataManagerProtocol!
     var textViewClearedOnInitialEdit = false
     var chosenText: String?
     var categoryName: String?
@@ -90,7 +90,9 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate, ChosenCate
 
     override func willMove(toParent parent: UIViewController?) {
         if parent == nil {
-            createNoteViewModel?.addNote(with: inputTextField.text, contents: contentTextView.text, emoji: emoji, img: image, category: category)
+            createNoteViewModel?.addNote(with: inputTextField.text, contents: contentTextView.text, emoji: emoji, img: image, categoryName: categoryName, categoryColour: categoryColour)
+            coreDataManager.saveContext()
+
         }
     }
     

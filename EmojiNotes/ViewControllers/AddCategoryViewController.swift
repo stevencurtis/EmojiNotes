@@ -17,7 +17,7 @@ class AddCategoryViewController: UIViewController {
     var newColor: UIColor?
     
     var delegate: ChosenCategoryDelegate?
-    var coreDataManager: CoreDataManager!
+    var coreDataManager: CoreDataManagerProtocol!
     
     var context: NSManagedObjectContext!
     
@@ -29,6 +29,8 @@ class AddCategoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Context??
+        // ToDO - on a new load this can lead to a crash??
+        guard let context = context, let coreDataManager = coreDataManager else {return}
         categoriesTableViewModel = CategoriesTableViewModel(coreDataManager, context)
         if currentCategory != nil {
             self.existingColour.text = (currentCategory?.color as? UIColor)?.name
