@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA13219422CDBEE900367902 /* NSManagedObject - init.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA13219322CDBEE900367902 /* NSManagedObject - init.swift */; };
+		CA13219622CDCAC000367902 /* NSManagedObjectInitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA13219522CDCAC000367902 /* NSManagedObjectInitTest.swift */; };
+		CA13219822CDD22A00367902 /* NotesViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA13219722CDD22A00367902 /* NotesViewModelTests.swift */; };
+		CA13219B22CDD65F00367902 /* ViewNoteViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA13219A22CDD65F00367902 /* ViewNoteViewModelTests.swift */; };
+		CA13219D22CDDC5D00367902 /* CategoriesTableViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA13219C22CDDC5D00367902 /* CategoriesTableViewModelTests.swift */; };
 		CA3D4C7522C3597C00DF41B2 /* ChooseEmojiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3D4C7422C3597C00DF41B2 /* ChooseEmojiViewController.swift */; };
 		CA3D4C7822C3621000DF41B2 /* EmojiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3D4C7622C3621000DF41B2 /* EmojiCollectionViewCell.swift */; };
 		CA3D4C7922C3621000DF41B2 /* EmojiCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA3D4C7722C3621000DF41B2 /* EmojiCollectionViewCell.xib */; };
@@ -60,6 +65,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CA13219322CDBEE900367902 /* NSManagedObject - init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject - init.swift"; sourceTree = "<group>"; };
+		CA13219522CDCAC000367902 /* NSManagedObjectInitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObjectInitTest.swift; sourceTree = "<group>"; };
+		CA13219722CDD22A00367902 /* NotesViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewModelTests.swift; sourceTree = "<group>"; };
+		CA13219A22CDD65F00367902 /* ViewNoteViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewNoteViewModelTests.swift; sourceTree = "<group>"; };
+		CA13219C22CDDC5D00367902 /* CategoriesTableViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTableViewModelTests.swift; sourceTree = "<group>"; };
 		CA3D4C7422C3597C00DF41B2 /* ChooseEmojiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseEmojiViewController.swift; sourceTree = "<group>"; };
 		CA3D4C7622C3621000DF41B2 /* EmojiCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCollectionViewCell.swift; sourceTree = "<group>"; };
 		CA3D4C7722C3621000DF41B2 /* EmojiCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmojiCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -126,10 +136,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CA13219922CDD63900367902 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				CA6F143322CC333000964D55 /* CreateNoteViewModelTests.swift */,
+				CA13219722CDD22A00367902 /* NotesViewModelTests.swift */,
+				CA13219A22CDD65F00367902 /* ViewNoteViewModelTests.swift */,
+				CA13219C22CDDC5D00367902 /* CategoriesTableViewModelTests.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		CA6F142F22CC2E9A00964D55 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				CA6F142B22CC280F00964D55 /* UIColorisDarkColorTest.swift */,
+				CA13219522CDCAC000367902 /* NSManagedObjectInitTest.swift */,
 				CA6F142D22CC2CF500964D55 /* UIColorNameTests.swift */,
 			);
 			path = Extensions;
@@ -155,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				CA3D4C7A22C3645200DF41B2 /* String - image.swift */,
+				CA13219322CDBEE900367902 /* NSManagedObject - init.swift */,
 				CAA6357222C0DB41006C8C1F /* UIColor - isDarkColor.swift */,
 				CAA6357422C0DBF8006C8C1F /* UIColor - name.swift */,
 				CA7D4BCC22C238EC0024D348 /* UITextView - doneAccessory.swift */,
@@ -206,7 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				CA6C68D122CB8BC900C31C7B /* CoreDataTests.swift */,
-				CA6F143322CC333000964D55 /* CreateNoteViewModelTests.swift */,
+				CA13219922CDD63900367902 /* ViewModels */,
 				CA6F143222CC31E900964D55 /* Mock */,
 				CA6F142F22CC2E9A00964D55 /* Extensions */,
 				CAF262F822BCB69C00AA164C /* Info.plist */,
@@ -408,6 +431,7 @@
 				CAF262E722BCB69800AA164C /* EmojiNotes.xcdatamodeld in Sources */,
 				CAA6356F22C0C0AD006C8C1F /* CategoriesTableViewController.swift in Sources */,
 				CAF2631F22BCDA0000AA164C /* AttachPhotoViewController.swift in Sources */,
+				CA13219422CDBEE900367902 /* NSManagedObject - init.swift in Sources */,
 				CAF2631022BCBA1500AA164C /* CoreDataManager.swift in Sources */,
 				CAF262DF22BCB69800AA164C /* AppDelegate.swift in Sources */,
 				CAA6357322C0DB41006C8C1F /* UIColor - isDarkColor.swift in Sources */,
@@ -421,11 +445,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA13219D22CDDC5D00367902 /* CategoriesTableViewModelTests.swift in Sources */,
 				CA6C68D222CB8BCA00C31C7B /* CoreDataTests.swift in Sources */,
+				CA13219822CDD22A00367902 /* NotesViewModelTests.swift in Sources */,
 				CA6F143122CC31B900964D55 /* CoreDataManagerMock.swift in Sources */,
 				CA6F143422CC333000964D55 /* CreateNoteViewModelTests.swift in Sources */,
 				CA6F142E22CC2CF500964D55 /* UIColorNameTests.swift in Sources */,
 				CA6F142C22CC280F00964D55 /* UIColorisDarkColorTest.swift in Sources */,
+				CA13219622CDCAC000367902 /* NSManagedObjectInitTest.swift in Sources */,
+				CA13219B22CDD65F00367902 /* ViewNoteViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,7 +17,6 @@ class NotesCollectionViewCell: UICollectionViewCell {
         self.clipsToBounds = true
     }
     @IBOutlet weak var titleLabel: UILabel!
-    
     @IBOutlet weak var view: UIView!
     @IBOutlet weak var imageView: UIImageView!
     

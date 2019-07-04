@@ -18,7 +18,6 @@ public class CategoriesTableViewModel: NSObject {
 
     var context: NSManagedObjectContext!
 
-
     lazy var fetchedResultsController: NSFetchedResultsController<Category> = {
         let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
         let fetchSort = NSSortDescriptor(key: #keyPath(Category.name), ascending: true)
@@ -56,7 +55,7 @@ public class CategoriesTableViewModel: NSObject {
     
     private func addCategory(with name: String, colour: UIColor) {
         let _ = buildCategory(with: name, colour: colour)
-        coreDataManager.saveContext()
+//        coreDataManager.saveContext()
     }
     
     func buildCategory(with name: String, colour: UIColor) -> Category? {
@@ -70,29 +69,27 @@ public class CategoriesTableViewModel: NSObject {
     func updateCategory(with category: Category, name: String, colour: UIColor) {
         category.setValue(colour, forKey: "color")
         category.setValue(name, forKey: "name")
-        coreDataManager.saveContext()
+//        coreDataManager.saveContext()
     }
     
     func deleteCategory(category: Category) {
         guard let moc = coreDataManager.getMainManagedObjectContext() else {return}
         moc.delete(category)
-        coreDataManager.saveContext()
-
+//        coreDataManager.saveContext()
     }
     
     func updateCategory(noteObjectID: NSManagedObjectID, colourObjectID: NSManagedObjectID) {
         let category = context.object(with: colourObjectID) as? Category
         let pcNote = context.object(with: noteObjectID) as? Note
         pcNote!.setValue(category, forKey: "category")
-        context.perform {
-            do {
-                try self.context.save()
-            } catch _ as NSError {
-                fatalError()
-            }
-        }
+//        context.perform {
+//            do {
+//                try self.context.save()
+//            } catch _ as NSError {
+//                fatalError()
+//            }
+//        }
     }
-    
 }
 
 extension CategoriesTableViewModel: NSFetchedResultsControllerDelegate {

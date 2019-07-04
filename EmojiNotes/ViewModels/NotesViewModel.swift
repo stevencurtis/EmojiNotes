@@ -14,14 +14,11 @@ public class NotesViewModel: NSObject {
 
     public var modelDidChange: (()->Void)?
     
-    var coreDataManager: CoreDataManager!
+    var coreDataManager: CoreDataManagerProtocol!
     
     lazy var fetchedResultsController: NSFetchedResultsController<Note> = {
-        
         let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
-        
         let fetchSort = NSSortDescriptor(key: #keyPath(Note.createdAt), ascending: true)
-
         fetchRequest.sortDescriptors = [fetchSort]
         let fetchedResultsController = NSFetchedResultsController(
             fetchRequest: fetchRequest,
@@ -40,7 +37,7 @@ public class NotesViewModel: NSObject {
         }
     }
     
-    init(_ coreDataManager : CoreDataManager) {
+    init(_ coreDataManager : CoreDataManagerProtocol) {
         super.init()
         self.coreDataManager = coreDataManager
         fetchedResultsController.delegate = self

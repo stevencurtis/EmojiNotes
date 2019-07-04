@@ -48,7 +48,7 @@ public class ViewNoteViewModel {
         
     }
     
-    init(_ coreDataManager : CoreDataManager, _ context: NSManagedObjectContext) {
+    init(_ coreDataManager : CoreDataManagerProtocol, _ context: NSManagedObjectContext) {
         self.coreDataManager = coreDataManager
         self.context = context
     }

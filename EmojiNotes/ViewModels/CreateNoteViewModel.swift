@@ -26,6 +26,8 @@ public class CreateNoteViewModel {
         }
     }
     
+    // a method of adding the note here is injecting the entities. This means changing production code for testing! In every other
+    // case like this tests are using mocks, since mocking core data manager means we do not have to change production code
     func addNote(with title: String? = nil, contents: String, emoji: String? = nil, img: UIImage? = nil, categoryName: String? = nil, categoryColour: UIColor? = nil, noteEntity: NSEntityDescription? = nil, pictureEntity: NSEntityDescription? = nil, categoryEntity: NSEntityDescription? = nil) {
         guard let moc = coreDataManager.getMainManagedObjectContext() else {return}
         guard contents != "Enter your note" else {return}
@@ -34,7 +36,7 @@ public class CreateNoteViewModel {
         if let noteEntity = noteEntity {
             note = Note(entity: noteEntity, insertInto: moc)
         } else {
-            note = Note(context: moc)
+            note = Note(using: moc)
         }
         note.contents = ( (contents == "Enter your note") ? "No contents" : contents )
         note.title = ( (title! == "") ? "Titleless note" : title)
@@ -47,7 +49,7 @@ public class CreateNoteViewModel {
         if let pictureEntity = pictureEntity {
             notePicture = NotePicture(entity: pictureEntity, insertInto: moc)
         } else {
-            notePicture = NotePicture(context: moc)
+            notePicture = NotePicture(using: moc)
         }
         
         notePicture.picture = img?.pngData()
@@ -59,7 +61,7 @@ public class CreateNoteViewModel {
         if let categoryEntity = categoryEntity {
             category = Category(entity: categoryEntity, insertInto: moc)
         } else {
-            category = Category(context: moc)
+            category = Category(using: moc)
         }
         
         category.color = categoryColour

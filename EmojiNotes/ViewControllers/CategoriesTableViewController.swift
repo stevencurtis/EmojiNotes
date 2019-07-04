@@ -32,7 +32,6 @@ class CategoriesTableViewController: UITableViewController {
             }
         }
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add Category", style: .plain, target: self, action: #selector(addTapped))
-
     }
     
     @objc func addTapped() {
@@ -92,13 +91,9 @@ class CategoriesTableViewController: UITableViewController {
       //  tableView.deselectRow(at: indexPath, animated: true)
         if let category = categoriesTableViewModel?.fetchedResultsController.object(at: indexPath) {
             // return & inform delegate in the view note view
-            
             delegate?.updateCategories(category: category, name: category.name ?? "NoName")
-
             categoriesTableViewModel!.updateCategory(noteObjectID: noteObjectID!, colourObjectID: category.objectID)
-
             self.navigationController?.popViewController(animated: true)
-        
         }
     }
     
