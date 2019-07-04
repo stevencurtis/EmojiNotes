@@ -135,9 +135,7 @@ extension NotesViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NotesCollectionViewCell", for: indexPath) as! NotesCollectionViewCell
         
         if let note = notesViewModel?.fetchedResultsController.object(at: indexPath) {
-            
             let colour = note.category?.color
-
             // configure the cell with the note
             if let picture = note.picture?.picture{                
                 cell.configure(title: note.title ?? "Untitled", colour: (colour as? UIColor) ?? UIColor.blue, emoji: note.emoji, image: UIImage(data: picture )  )
