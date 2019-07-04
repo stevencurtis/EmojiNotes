@@ -25,11 +25,11 @@ class CreateNoteViewController: UIViewController, CreateNoteDelegate, ChosenCate
 
     @IBOutlet weak var chooseEmojiButton: UIButton!
     func chosenCategory(_ category: Category) {
-        self.category = category
+        self.categoryName = category.name
+        self.categoryColour = category.color as? UIColor
     }
     
     var emoji : String?
-    var category : Category?
     var createNoteViewModel : CreateNoteViewModel?
     var image : UIImage?
     var coreDataManager: CoreDataManagerProtocol!

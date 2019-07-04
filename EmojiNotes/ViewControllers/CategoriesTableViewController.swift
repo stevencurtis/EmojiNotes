@@ -34,6 +34,13 @@ class CategoriesTableViewController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add Category", style: .plain, target: self, action: #selector(addTapped))
     }
     
+    override func willMove(toParent parent: UIViewController?) {
+        if parent == nil {
+            // back button pressed, save the child class and pass back to the main context for saving
+            coreDataManager.saveContext()
+        }
+    }
+    
     @objc func addTapped() {
         // addCategory
         performSegue(withIdentifier: "addCategory", sender: nil)

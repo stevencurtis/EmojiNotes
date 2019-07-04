@@ -362,7 +362,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xAD-Cb-uav" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1896" y="854"/>
+            <point key="canvasLocation" x="1925" y="854"/>
         </scene>
         <!--Add Category View Controller-->
         <scene sceneID="Na4-MB-qqy">
@@ -629,7 +629,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rVd-Pc-U6Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1897" y="-185"/>
+            <point key="canvasLocation" x="1861" y="-379"/>
         </scene>
         <!--Choose Emoji View Controller-->
         <scene sceneID="ZAv-pj-Q6O">
@@ -666,7 +666,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yZB-Rp-7h7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2805.7971014492755" y="-185.49107142857142"/>
+            <point key="canvasLocation" x="2806" y="-449"/>
         </scene>
         <!--Attach Photo View Controller-->
         <scene sceneID="U0r-gv-Ijn">
